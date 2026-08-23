@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# Chroma database
+chroma_db/
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Python packaging
+*.egg-info/
+dist/
+build/

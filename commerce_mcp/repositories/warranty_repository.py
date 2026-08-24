@@ -9,7 +9,6 @@ class WarrantyRepository:
         self,
         customer_id: int,
         order_number: str,
-        product_id: int,
     ) -> dict | None:
 
         sql = text("""
@@ -44,8 +43,7 @@ class WarrantyRepository:
                 ON wp.warranty_plan_id = cw.warranty_plan_id
 
             WHERE o.customer_id = :customer_id
-              AND o.order_number = :order_number
-              AND p.product_id = :product_id
+            AND o.order_number = :order_number
         """)
 
         with engine.connect() as connection:
@@ -54,7 +52,6 @@ class WarrantyRepository:
                 {
                     "customer_id": customer_id,
                     "order_number": order_number,
-                    "product_id": product_id,
                 },
             ).mappings().first()
 

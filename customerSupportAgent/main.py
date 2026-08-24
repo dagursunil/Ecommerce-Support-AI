@@ -32,6 +32,8 @@ async def main():
             "url": COMMERCE_MCP_URL,
             "timeout": 10,
         },
+        cache_tools_list=True,
+        max_retry_attempts=3,
     ) as commerce_mcp, MCPServerStreamableHttp(
         name="policy-mcp",
         params={

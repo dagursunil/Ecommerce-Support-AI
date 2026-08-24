@@ -121,9 +121,28 @@ Retrieve order and shipment status using a customer ID and customer-facing order
 
 #### `get_warranty_details`
 
-Retrieve warranty ownership, plan, status, and validity information for a product purchased by a customer.
+Retrieve warranty ownership, plan, status, and validity information
+for the product purchased in a customer's order.
 
-Warranty coverage rules themselves are handled through policy evidence retrieved by the Policy MCP.
+The tool accepts:
+
+- `customer_id`
+- `order_number`
+
+The Commerce MCP resolves the corresponding order item and product
+internally. The customer or support agent does not need to know the
+internal `product_id`.
+
+The tool returns factual warranty ownership information such as:
+
+- product
+- warranty plan
+- warranty status
+- validity period
+- purchase information
+
+Detailed warranty coverage rules are policy knowledge and are retrieved
+through the Policy MCP rather than stored as Commerce MCP logic.
 
 #### `place_order`
 
@@ -574,8 +593,11 @@ Do not commit `.env` or real credentials to source control.
 - [x] Autonomous tool selection
 - [x] Commerce-only query handling
 - [x] Policy-only query handling
-- [x] Initial multi-tool query handling
-- [ ] Improve order-to-warranty lookup
+- [x] Multi-tool query handling
+- [x] Order-based warranty lookup
+- [x] Warranty verification from customer ID + order number
+- [ ] Detailed warranty-policy document ingestion
+- [ ] Retrieval evaluation framework
 - [ ] Customer confirmation flow for order placement
 - [ ] Idempotency-key generation
 - [ ] Conversation/session handling

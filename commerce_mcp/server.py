@@ -84,7 +84,6 @@ def get_product_details(
 def get_warranty_details(
     customer_id: int,
     order_number: str,
-    product_id: int,
 ) -> dict:
     """
     Get extended warranty ownership and validity information
@@ -94,7 +93,6 @@ def get_warranty_details(
     return warranty_service.get_warranty_details(
         customer_id=customer_id,
         order_number=order_number,
-        product_id=product_id,
     )
 
 @mcp.tool()

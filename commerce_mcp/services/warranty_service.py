@@ -19,13 +19,11 @@ class WarrantyService:
         self,
         customer_id: int,
         order_number: str,
-        product_id: int,
     ) -> dict:
 
         result = self.repository.get_warranty_details(
             customer_id=customer_id,
             order_number=order_number,
-            product_id=product_id,
         )
 
         if result is None:

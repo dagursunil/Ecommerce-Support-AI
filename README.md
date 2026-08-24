@@ -605,37 +605,6 @@ Do not commit `.env` or real credentials to source control.
 
 ## Known Issues / Next Steps
 
-### Order-to-Warranty Lookup
-
-Current agent testing exposed an API-contract issue for customer-specific return and warranty questions.
-
-For example:
-
-```text
-"I am customer 1. Can I return the laptop from
-order ORD-2026-000001? It is damaged."
-```
-
-The agent can retrieve the order and relevant policy evidence, but the current Commerce MCP tool contract may not provide enough information for the agent to resolve the purchased warranty directly from the known order.
-
-The customer should not be required to provide an internal `product_id` when the order is already known.
-
-This flow needs to be improved:
-
-```text
-customer_id + order_number
-        ↓
-order
-        ↓
-order item
-        ↓
-product
-        ↓
-purchased warranty
-```
-
-A Commerce MCP capability or existing tool contract will be updated to support this lookup cleanly.
-
 ### Retrieval Evaluation
 
 The current adaptive retrieval thresholds are provisional.

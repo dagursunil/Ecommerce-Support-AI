@@ -12,6 +12,10 @@ from customerSupportAgent.prompt import (
     SUPPORT_AGENT_INSTRUCTIONS,
 )
 
+from evals.agent.llm_judge import (
+    judge_response,
+)
+
 
 load_dotenv()
 
@@ -152,12 +156,30 @@ Customer message:
             tools_called=hooks.tools_called,
         )
 
+        judge_result = None
+
+        judge_config = case.get("judge", {})
+
+        if judge_config.get("enabled", False):
+
+            judge_result = await judge_response(
+                query=case["query"],
+                criteria=judge_config["criteria"],
+                tool_results=hooks.tool_results,
+                final_output=result.final_output,
+            )        
+
         return {
             "case_id": case["id"],
             "customer_id": customer_id,
             "query": case["query"],
             "tools_called": hooks.tools_called,
             "tool_results": hooks.tool_results,
+            "judge": (
+                judge_result.model_dump()
+                if judge_result is not None
+                else None
+            ),            
             **tool_metrics,
             "final_output": result.final_output,
             "latency_seconds": latency,
@@ -210,6 +232,22 @@ def calculate_summary(
         len(result["extra_tools"])
         for result in results
     )
+    judged_results = [
+        result
+        for result in results
+        if result.get("judge") is not None
+    ]
+
+    judge_passed = sum(
+        1
+        for result in judged_results
+        if result["judge"]["passed"]
+    )
+
+    judge_scores = [
+        result["judge"]["score"]
+        for result in judged_results
+    ]
 
     return {
         "case_count": total,
@@ -226,6 +264,19 @@ def calculate_summary(
         ),
         "total_extra_tools": (
             total_extra_tools
+        ),
+        "judge_case_count": len(judged_results),
+
+        "judge_pass_rate": (
+            judge_passed / len(judged_results)
+            if judged_results
+            else None
+        ),
+
+        "average_judge_score": (
+            sum(judge_scores) / len(judge_scores)
+            if judge_scores
+            else None
         ),
     }
 
@@ -278,6 +329,45 @@ def print_case_result(
             f"Error: {result['error']}"
         )
 
+    if result.get("judge"):
+
+        judge = result["judge"]
+
+        print(
+            f"Judge: "
+            f"{'PASS' if judge['passed'] else 'FAIL'}"
+        )
+
+        print(
+            f"Judge score: "
+            f"{judge['score']}/5"
+        )
+
+        print(
+            f"Groundedness: "
+            f"{judge['groundedness']}/5"
+        )
+
+        print(
+            f"Correctness: "
+            f"{judge['correctness']}/5"
+        )
+
+        print(
+            f"Completeness: "
+            f"{judge['completeness']}/5"
+        )
+
+        print(
+            f"Unsupported claims: "
+            f"{judge['unsupported_claims']}"
+        )
+
+        print(
+            f"Judge reason: "
+            f"{judge['reason']}"
+        )
+
 
 def print_summary(
     summary: dict,
@@ -312,6 +402,22 @@ def print_summary(
         f"Total extra tools: "
         f"{summary['total_extra_tools']}"
     )
+
+    print(
+        f"Judge cases: "
+        f"{summary['judge_case_count']}"
+    )
+
+    if summary["judge_pass_rate"] is not None:
+        print(
+            f"Judge pass rate: "
+            f"{summary['judge_pass_rate']:.3f}"
+        )
+
+        print(
+            f"Average judge score: "
+            f"{summary['average_judge_score']:.2f}/5"
+        )
 
 
 def save_results(

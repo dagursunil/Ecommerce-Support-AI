@@ -138,6 +138,24 @@ def get_order_details(
         order_number=order_number,
     )
 
+@mcp.tool()
+def list_customer_addresses(
+    customer_id: int,
+) -> dict:
+    """
+    List the saved shipping addresses belonging to a customer.
+
+    Use this before order placement to let the customer choose
+    one of their existing saved shipping addresses.
+
+    Do not ask the customer for an internal address_id.
+    Do not create or modify addresses.
+    """
+
+    return order_service.list_customer_addresses(
+        customer_id=customer_id,
+    )
+
 if __name__ == "__main__":
     mcp.run(
         transport="streamable-http",

@@ -332,6 +332,37 @@ class OrderRepository:
                 "total_amount": total_amount,
                 "currency": product["currency"],
             }
+
+    def list_customer_addresses(
+        self,
+        customer_id: int,
+    ) -> list[dict]:
+
+        with engine.connect() as connection:
+            rows = connection.execute(
+                text("""
+                    SELECT
+                        address_id,
+                        address_line1,
+                        address_line2,
+                        city,
+                        state,
+                        postal_code,
+                        country_code
+                    FROM customer_addresses
+                    WHERE customer_id = :customer_id
+                    ORDER BY address_id
+                """),
+                {
+                    "customer_id": customer_id,
+                },
+            ).mappings().all()
+
+            return [
+                dict(row)
+                for row in rows
+            ]
+
     def get_order_details(
         self,
         customer_id: int,

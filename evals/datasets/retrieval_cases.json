@@ -1,0 +1,150 @@
+[
+  {
+    "id": "return_window_001",
+    "query": "How long do I have to return an unused product?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0001"
+    ]
+  },
+  {
+    "id": "damaged_item_001",
+    "query": "My product arrived damaged. What should I do?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0002"
+    ]
+  },
+  {
+    "id": "electronics_001",
+    "query": "Can I return an opened electronic product?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0002",
+      "return_policy_de_2026-0003"
+    ]
+  },
+  {
+    "id": "warranty_after_window_001",
+    "query": "Can a damaged laptop still qualify for help after the normal return period?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0003",
+      "return_policy_de_2026-0004"
+    ]
+  },
+  {
+    "id": "refund_timing_001",
+    "query": "How long does a refund take after it is approved?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0005"
+    ]
+  },
+  {
+    "id": "return_shipping_001",
+    "query": "Who pays return shipping for a damaged product?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0005"
+    ]
+  },
+  {
+    "id": "packaging_001",
+    "query": "Can I make a defective product claim without the original packaging?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0005"
+    ]
+  },
+  {
+    "id": "exceptions_001",
+    "query": "What happens if return policy and warranty terms conflict?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0006"
+    ]
+  },
+  {
+    "id": "return_window_paraphrase_002",
+    "query": "What is the normal deadline for sending something back if I no longer want it?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0001"
+    ]
+  },
+  {
+    "id": "return_window_delivery_003",
+    "query": "Is the 30-day return period counted from purchase date or delivery date?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0001"
+    ]
+  },
+  {
+    "id": "damaged_14_day_002",
+    "query": "What happens if I report a damaged product within two weeks of delivery?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0002"
+    ]
+  },
+  {
+    "id": "damaged_after_14_days_003",
+    "query": "I noticed the product was damaged more than 14 days after delivery. What rules apply?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0002"
+    ]
+  },
+  {
+    "id": "opened_electronics_misuse_002",
+    "query": "Can an opened electronic item be refused for return if it shows misuse or accidental damage?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0002",
+      "return_policy_de_2026-0003"
+    ]
+  },
+  {
+    "id": "extended_warranty_return_002",
+    "query": "Does buying an extended warranty give me more than 30 days to return an unwanted product?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0003"
+    ]
+  },
+  {
+    "id": "warranty_remedies_003",
+    "query": "What remedies might be available under an active extended warranty after the normal return period?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0003",
+      "return_policy_de_2026-0004"
+    ]
+  },
+  {
+    "id": "non_returnable_items_001",
+    "query": "Which kinds of products may be restricted from change-of-mind returns?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0004"
+    ]
+  },
+  {
+    "id": "refund_method_002",
+    "query": "Where is an approved refund normally sent?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0005"
+    ]
+  },
+  {
+    "id": "escalation_002",
+    "query": "Should support automatically reject a case when return rules, warranty terms, and statutory rights seem inconsistent?",
+    "country": "DE",
+    "expected_chunk_ids": [
+      "return_policy_de_2026-0006"
+    ]
+  }
+]

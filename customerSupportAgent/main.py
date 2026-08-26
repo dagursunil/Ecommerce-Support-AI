@@ -101,7 +101,10 @@ async def main():
             underlying_session=underlying_session,
         )
 
-
+        customer_id = int(input("Customer ID: "))
+        session_context = {
+            "customer_id": customer_id
+        }        
         print("\nCustomer Support Agent is ready.")
         print("Type 'exit' or 'quit' to end the session.\n")
 
@@ -116,9 +119,17 @@ async def main():
             if not user_query:
                 continue
 
+            agent_input = f"""
+            Authenticated customer context:
+            customer_id={session_context["customer_id"]}
+
+            Customer message:
+            {user_query}
+            """.strip()                
+            
             result = await Runner.run(
                 agent,
-                user_query,
+                agent_input,
                 session=session,
                 hooks=LoggingHooks(),
             )

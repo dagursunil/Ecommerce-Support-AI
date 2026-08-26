@@ -134,3 +134,26 @@ class OrderService:
             "code": "ORDER_DETAILS_FOUND",
             "data": result,
         }
+
+    def list_customer_addresses(
+        self,
+        customer_id: int,
+    ) -> dict:
+
+        addresses = self.repository.list_customer_addresses(
+            customer_id=customer_id,
+        )
+
+        if not addresses:
+            return {
+                "success": False,
+                "code": "NO_ADDRESSES_FOUND",
+                "message": "No saved shipping addresses were found.",
+            }
+
+        return {
+            "success": True,
+            "code": "CUSTOMER_ADDRESSES_FOUND",
+            "count": len(addresses),
+            "data": addresses,
+        }

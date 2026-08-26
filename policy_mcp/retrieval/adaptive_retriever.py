@@ -18,14 +18,24 @@ def retrieval_is_good(
     second_threshold: float,
 ) -> bool:
 
-    if len(results) < 2:
+    if not results:
         return False
 
-    return (
-        results[0]["score"] >= top_threshold
-        and results[1]["score"] >= second_threshold
-    )
+    top_score = results[0]["score"]
 
+    if top_score >= top_threshold:
+        return True
+
+    if len(results) >= 2:
+        second_score = results[1]["score"]
+
+        if (
+            top_score >= second_threshold
+            and second_score >= second_threshold
+        ):
+            return True
+
+    return False
 
 def search_policy_adaptive(
     query: str,

@@ -1,0 +1,1500 @@
+{
+  "strategies": [
+    {
+      "strategy": "simple",
+      "summary": {
+        "case_count": 18,
+        "hit_at_1": 0.7222222222222222,
+        "hit_at_3": 0.8333333333333334,
+        "mrr": 0.7777777777777778,
+        "average_latency_seconds": 0.6506915777895806
+      },
+      "cases": [
+        {
+          "case_id": "return_window_001",
+          "query": "How long do I have to return an unused product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 5.9567473999923095
+        },
+        {
+          "case_id": "damaged_item_001",
+          "query": "My product arrived damaged. What should I do?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.5945175000233576
+        },
+        {
+          "case_id": "electronics_001",
+          "query": "Can I return an opened electronic product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.26150120003148913
+        },
+        {
+          "case_id": "warranty_after_window_001",
+          "query": "Can a damaged laptop still qualify for help after the normal return period?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 0.21572040009777993
+        },
+        {
+          "case_id": "refund_timing_001",
+          "query": "How long does a refund take after it is approved?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.43146360001992434
+        },
+        {
+          "case_id": "return_shipping_001",
+          "query": "Who pays return shipping for a damaged product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.28093180002178997
+        },
+        {
+          "case_id": "packaging_001",
+          "query": "Can I make a defective product claim without the original packaging?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.3065305999480188
+        },
+        {
+          "case_id": "exceptions_001",
+          "query": "What happens if return policy and warranty terms conflict?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0006"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0006",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 0.330907900002785
+        },
+        {
+          "case_id": "return_window_paraphrase_002",
+          "query": "What is the normal deadline for sending something back if I no longer want it?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 0.38896659994497895
+        },
+        {
+          "case_id": "return_window_delivery_003",
+          "query": "Is the 30-day return period counted from purchase date or delivery date?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 0.2675662999972701
+        },
+        {
+          "case_id": "damaged_14_day_002",
+          "query": "What happens if I report a damaged product within two weeks of delivery?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.5173237000126392
+        },
+        {
+          "case_id": "damaged_after_14_days_003",
+          "query": "I noticed the product was damaged more than 14 days after delivery. What rules apply?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.47501429996918887
+        },
+        {
+          "case_id": "opened_electronics_misuse_002",
+          "query": "Can an opened electronic item be refused for return if it shows misuse or accidental damage?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.2748011000221595
+        },
+        {
+          "case_id": "extended_warranty_return_002",
+          "query": "Does buying an extended warranty give me more than 30 days to return an unwanted product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0002"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.2728498999495059
+        },
+        {
+          "case_id": "warranty_remedies_003",
+          "query": "What remedies might be available under an active extended warranty after the normal return period?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0002"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.31009290006477386
+        },
+        {
+          "case_id": "non_returnable_items_001",
+          "query": "Which kinds of products may be restricted from change-of-mind returns?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0006"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.29247480002231896
+        },
+        {
+          "case_id": "refund_method_002",
+          "query": "Where is an approved refund normally sent?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.27727320010308176
+        },
+        {
+          "case_id": "escalation_002",
+          "query": "Should support automatically reject a case when return rules, warranty terms, and statutory rights seem inconsistent?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0006"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0006",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.25776519998908043
+        }
+      ]
+    },
+    {
+      "strategy": "hyde",
+      "summary": {
+        "case_count": 18,
+        "hit_at_1": 0.6666666666666666,
+        "hit_at_3": 0.8333333333333334,
+        "mrr": 0.75,
+        "average_latency_seconds": 3.096097211127118
+      },
+      "cases": [
+        {
+          "case_id": "return_window_001",
+          "query": "How long do I have to return an unused product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 5.520075499895029
+        },
+        {
+          "case_id": "damaged_item_001",
+          "query": "My product arrived damaged. What should I do?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.5797254000790417
+        },
+        {
+          "case_id": "electronics_001",
+          "query": "Can I return an opened electronic product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.068502099951729
+        },
+        {
+          "case_id": "warranty_after_window_001",
+          "query": "Can a damaged laptop still qualify for help after the normal return period?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 6.063509400002658
+        },
+        {
+          "case_id": "refund_timing_001",
+          "query": "How long does a refund take after it is approved?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 3.0619616999756545
+        },
+        {
+          "case_id": "return_shipping_001",
+          "query": "Who pays return shipping for a damaged product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 2.06601499998942
+        },
+        {
+          "case_id": "packaging_001",
+          "query": "Can I make a defective product claim without the original packaging?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.1127006000606343
+        },
+        {
+          "case_id": "exceptions_001",
+          "query": "What happens if return policy and warranty terms conflict?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0006"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0006",
+            "return_policy_de_2026-0002"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 2.0426200999645516
+        },
+        {
+          "case_id": "return_window_paraphrase_002",
+          "query": "What is the normal deadline for sending something back if I no longer want it?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 3.342624200042337
+        },
+        {
+          "case_id": "return_window_delivery_003",
+          "query": "Is the 30-day return period counted from purchase date or delivery date?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 3.8777412000345066
+        },
+        {
+          "case_id": "damaged_14_day_002",
+          "query": "What happens if I report a damaged product within two weeks of delivery?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 4.95391650008969
+        },
+        {
+          "case_id": "damaged_after_14_days_003",
+          "query": "I noticed the product was damaged more than 14 days after delivery. What rules apply?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.427777700009756
+        },
+        {
+          "case_id": "opened_electronics_misuse_002",
+          "query": "Can an opened electronic item be refused for return if it shows misuse or accidental damage?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.6410058999899775
+        },
+        {
+          "case_id": "extended_warranty_return_002",
+          "query": "Does buying an extended warranty give me more than 30 days to return an unwanted product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0002"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.2498559000669047
+        },
+        {
+          "case_id": "warranty_remedies_003",
+          "query": "What remedies might be available under an active extended warranty after the normal return period?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0002"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.0216508000157773
+        },
+        {
+          "case_id": "non_returnable_items_001",
+          "query": "Which kinds of products may be restricted from change-of-mind returns?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0006",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 3.488400900037959
+        },
+        {
+          "case_id": "refund_method_002",
+          "query": "Where is an approved refund normally sent?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.2091324999928474
+        },
+        {
+          "case_id": "escalation_002",
+          "query": "Should support automatically reject a case when return rules, warranty terms, and statutory rights seem inconsistent?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0006"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0006",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 3.002534400089644
+        }
+      ]
+    },
+    {
+      "strategy": "multi_query",
+      "summary": {
+        "case_count": 18,
+        "hit_at_1": 0.6666666666666666,
+        "hit_at_3": 0.8333333333333334,
+        "mrr": 0.75,
+        "average_latency_seconds": 2.509561794434881
+      },
+      "cases": [
+        {
+          "case_id": "return_window_001",
+          "query": "How long do I have to return an unused product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 4.2927171000046656
+        },
+        {
+          "case_id": "damaged_item_001",
+          "query": "My product arrived damaged. What should I do?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.350416600005701
+        },
+        {
+          "case_id": "electronics_001",
+          "query": "Can I return an opened electronic product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0001",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 1.7572278999723494
+        },
+        {
+          "case_id": "warranty_after_window_001",
+          "query": "Can a damaged laptop still qualify for help after the normal return period?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 2.2309860999230295
+        },
+        {
+          "case_id": "refund_timing_001",
+          "query": "How long does a refund take after it is approved?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.0684878999600187
+        },
+        {
+          "case_id": "return_shipping_001",
+          "query": "Who pays return shipping for a damaged product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 2.137770500034094
+        },
+        {
+          "case_id": "packaging_001",
+          "query": "Can I make a defective product claim without the original packaging?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.187890199944377
+        },
+        {
+          "case_id": "exceptions_001",
+          "query": "What happens if return policy and warranty terms conflict?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0006"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0006",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.20465690002311
+        },
+        {
+          "case_id": "return_window_paraphrase_002",
+          "query": "What is the normal deadline for sending something back if I no longer want it?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 5.713747999980114
+        },
+        {
+          "case_id": "return_window_delivery_003",
+          "query": "Is the 30-day return period counted from purchase date or delivery date?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 2.3386755000101402
+        },
+        {
+          "case_id": "damaged_14_day_002",
+          "query": "What happens if I report a damaged product within two weeks of delivery?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.0669691000366583
+        },
+        {
+          "case_id": "damaged_after_14_days_003",
+          "query": "I noticed the product was damaged more than 14 days after delivery. What rules apply?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.2483443999662995
+        },
+        {
+          "case_id": "opened_electronics_misuse_002",
+          "query": "Can an opened electronic item be refused for return if it shows misuse or accidental damage?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.339939899975434
+        },
+        {
+          "case_id": "extended_warranty_return_002",
+          "query": "Does buying an extended warranty give me more than 30 days to return an unwanted product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0002"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.8843708999920636
+        },
+        {
+          "case_id": "warranty_remedies_003",
+          "query": "What remedies might be available under an active extended warranty after the normal return period?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0002"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.0211690000724047
+        },
+        {
+          "case_id": "non_returnable_items_001",
+          "query": "Which kinds of products may be restricted from change-of-mind returns?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0006"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 2.0263884000014514
+        },
+        {
+          "case_id": "refund_method_002",
+          "query": "Where is an approved refund normally sent?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0006"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.0923848999664187
+        },
+        {
+          "case_id": "escalation_002",
+          "query": "Should support automatically reject a case when return rules, warranty terms, and statutory rights seem inconsistent?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0006"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0006",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0002"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.2099689999595284
+        }
+      ]
+    },
+    {
+      "strategy": "adaptive",
+      "summary": {
+        "case_count": 18,
+        "hit_at_1": 0.6666666666666666,
+        "hit_at_3": 0.8333333333333334,
+        "mrr": 0.75,
+        "average_latency_seconds": 2.0942322666718005
+      },
+      "cases": [
+        {
+          "case_id": "return_window_001",
+          "query": "How long do I have to return an unused product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 1.2659641000209376
+        },
+        {
+          "case_id": "damaged_item_001",
+          "query": "My product arrived damaged. What should I do?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.571154600009322
+        },
+        {
+          "case_id": "electronics_001",
+          "query": "Can I return an opened electronic product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.3544705999083817
+        },
+        {
+          "case_id": "warranty_after_window_001",
+          "query": "Can a damaged laptop still qualify for help after the normal return period?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 0.3543412999715656
+        },
+        {
+          "case_id": "refund_timing_001",
+          "query": "How long does a refund take after it is approved?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 4.709091700031422
+        },
+        {
+          "case_id": "return_shipping_001",
+          "query": "Who pays return shipping for a damaged product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.48447160003706813
+        },
+        {
+          "case_id": "packaging_001",
+          "query": "Can I make a defective product claim without the original packaging?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 2.5886339000426233
+        },
+        {
+          "case_id": "exceptions_001",
+          "query": "What happens if return policy and warranty terms conflict?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0006"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0006",
+            "return_policy_de_2026-0003"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 2,
+          "hit_at_1": 0,
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5,
+          "latency_seconds": 0.37995640002191067
+        },
+        {
+          "case_id": "return_window_paraphrase_002",
+          "query": "What is the normal deadline for sending something back if I no longer want it?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 3.3551043999614194
+        },
+        {
+          "case_id": "return_window_delivery_003",
+          "query": "Is the 30-day return period counted from purchase date or delivery date?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0001"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": null,
+          "hit_at_1": 0,
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0,
+          "latency_seconds": 2.4032543000066653
+        },
+        {
+          "case_id": "damaged_14_day_002",
+          "query": "What happens if I report a damaged product within two weeks of delivery?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0001"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 2.7641383999725804
+        },
+        {
+          "case_id": "damaged_after_14_days_003",
+          "query": "I noticed the product was damaged more than 14 days after delivery. What rules apply?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "hyde",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 5.03921590000391
+        },
+        {
+          "case_id": "opened_electronics_misuse_002",
+          "query": "Can an opened electronic item be refused for return if it shows misuse or accidental damage?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0005"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.42706310003995895
+        },
+        {
+          "case_id": "extended_warranty_return_002",
+          "query": "Does buying an extended warranty give me more than 30 days to return an unwanted product?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0002"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.42439149995334446
+        },
+        {
+          "case_id": "warranty_remedies_003",
+          "query": "What remedies might be available under an active extended warranty after the normal return period?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0002"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.46586400002706796
+        },
+        {
+          "case_id": "non_returnable_items_001",
+          "query": "Which kinds of products may be restricted from change-of-mind returns?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0004"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0004",
+            "return_policy_de_2026-0003",
+            "return_policy_de_2026-0006"
+          ],
+          "selected_strategy": "simple",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 0.3617876000935212
+        },
+        {
+          "case_id": "refund_method_002",
+          "query": "Where is an approved refund normally sent?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0005"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0005",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0006"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 4.849281999981031
+        },
+        {
+          "case_id": "escalation_002",
+          "query": "Should support automatically reject a case when return rules, warranty terms, and statutory rights seem inconsistent?",
+          "expected_chunk_ids": [
+            "return_policy_de_2026-0006"
+          ],
+          "retrieved_chunk_ids": [
+            "return_policy_de_2026-0006",
+            "return_policy_de_2026-0002",
+            "return_policy_de_2026-0004"
+          ],
+          "selected_strategy": "multi_query",
+          "first_relevant_rank": 1,
+          "hit_at_1": 1,
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0,
+          "latency_seconds": 4.897995400009677
+        }
+      ]
+    }
+  ],
+  "adaptive_efficiency": {
+    "total_cases": 18,
+    "escalated_cases": 9,
+    "escalation_rate": 0.5,
+    "useful_escalations": 0,
+    "unnecessary_escalations": 7,
+    "failed_escalations": 2,
+    "details": [
+      {
+        "case_id": "return_window_001",
+        "selected_strategy": "simple",
+        "simple_hit_at_3": 0,
+        "adaptive_hit_at_3": 0,
+        "classification": "no_escalation"
+      },
+      {
+        "case_id": "damaged_item_001",
+        "selected_strategy": "hyde",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "unnecessary_escalation"
+      },
+      {
+        "case_id": "electronics_001",
+        "selected_strategy": "simple",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "no_escalation"
+      },
+      {
+        "case_id": "warranty_after_window_001",
+        "selected_strategy": "simple",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "no_escalation"
+      },
+      {
+        "case_id": "refund_timing_001",
+        "selected_strategy": "multi_query",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "unnecessary_escalation"
+      },
+      {
+        "case_id": "return_shipping_001",
+        "selected_strategy": "simple",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "no_escalation"
+      },
+      {
+        "case_id": "packaging_001",
+        "selected_strategy": "hyde",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "unnecessary_escalation"
+      },
+      {
+        "case_id": "exceptions_001",
+        "selected_strategy": "simple",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "no_escalation"
+      },
+      {
+        "case_id": "return_window_paraphrase_002",
+        "selected_strategy": "hyde",
+        "simple_hit_at_3": 0,
+        "adaptive_hit_at_3": 0,
+        "classification": "failed_escalation"
+      },
+      {
+        "case_id": "return_window_delivery_003",
+        "selected_strategy": "hyde",
+        "simple_hit_at_3": 0,
+        "adaptive_hit_at_3": 0,
+        "classification": "failed_escalation"
+      },
+      {
+        "case_id": "damaged_14_day_002",
+        "selected_strategy": "hyde",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "unnecessary_escalation"
+      },
+      {
+        "case_id": "damaged_after_14_days_003",
+        "selected_strategy": "hyde",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "unnecessary_escalation"
+      },
+      {
+        "case_id": "opened_electronics_misuse_002",
+        "selected_strategy": "simple",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "no_escalation"
+      },
+      {
+        "case_id": "extended_warranty_return_002",
+        "selected_strategy": "simple",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "no_escalation"
+      },
+      {
+        "case_id": "warranty_remedies_003",
+        "selected_strategy": "simple",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "no_escalation"
+      },
+      {
+        "case_id": "non_returnable_items_001",
+        "selected_strategy": "simple",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "no_escalation"
+      },
+      {
+        "case_id": "refund_method_002",
+        "selected_strategy": "multi_query",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "unnecessary_escalation"
+      },
+      {
+        "case_id": "escalation_002",
+        "selected_strategy": "multi_query",
+        "simple_hit_at_3": 1,
+        "adaptive_hit_at_3": 1,
+        "classification": "unnecessary_escalation"
+      }
+    ]
+  }
+}

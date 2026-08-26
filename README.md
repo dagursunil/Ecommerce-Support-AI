@@ -1,188 +1,90 @@
 # eCommSupport-AI
 
-An AI-powered e-commerce customer support system built around the Model Context Protocol (MCP).
+An AI-powered e-commerce customer support system built around the
+**Model Context Protocol (MCP)**.
 
-The project separates transactional commerce operations from semantic policy retrieval into independent MCP servers. An OpenAI customer support agent uses these MCP servers to retrieve authoritative business facts and policy evidence before generating customer-facing responses.
+The project separates transactional commerce operations from semantic
+policy retrieval into independent MCP servers. A customer support agent
+built with the **OpenAI Agents SDK** uses these servers to retrieve
+authoritative business facts and policy evidence before generating
+customer-facing responses.
 
 ## Architecture
 
-```text
-
-                    ┌─────────────────────────┐
-
-                    │ Customer Support Agent  │
-
-                    │   OpenAI Agents SDK     │
-
-                    └────────────┬────────────┘
-
-                                 │
-
-                  ┌──────────────┴──────────────┐
-
-                  │                             │
-
-                  ▼                             ▼
-
-        ┌─────────────────┐           ┌─────────────────┐
-
-        │  Commerce MCP   │           │   Policy MCP    │
-
-        │                 │           │                 │
-
-        │ Orders          │           │ Policy Search   │
-
-        │ Products        │           │ Returns         │
-
-        │ Shipments       │           │ Warranty Terms  │
-
-        │ Warranties      │           │ Adaptive RAG    │
-
-        └────────┬────────┘           └────────┬────────┘
-
-                 │                             │
-
-                 ▼                             ▼
-
-        ┌─────────────────┐           ┌─────────────────┐
-
-        │      MySQL      │           │    Pinecone     │
-
-        └─────────────────┘           └─────────────────┘
-
+``` text
+                    ┌─────────────────────────┐
+                    │ Customer Support Agent  │
+                    │   OpenAI Agents SDK     │
+                    └────────────┬────────────┘
+                                 │
+                  ┌──────────────┴──────────────┐
+                  │                             │
+                  ▼                             ▼
+        ┌─────────────────┐           ┌─────────────────┐
+        │  Commerce MCP   │           │   Policy MCP    │
+        │                 │           │                 │
+        │ Orders          │           │ Policy Search   │
+        │ Products        │           │ Returns         │
+        │ Shipments       │           │ Warranty Terms  │
+        │ Warranties      │           │ Adaptive RAG    │
+        └────────┬────────┘           └────────┬────────┘
+                 │                             │
+                 ▼                             ▼
+        ┌─────────────────┐           ┌─────────────────┐
+        │      MySQL      │           │    Pinecone     │
+        └─────────────────┘           └─────────────────┘
 ```
 
-The responsibilities are intentionally separated:
+Responsibilities are intentionally separated:
 
-```text
-
-Commerce MCP
-
-→ authoritative customer and transactional facts
-
-Policy MCP
-
-→ authoritative policy evidence
-
-Customer Support Agent
-
-→ tool selection, reasoning, and customer-facing response
-
-```
+-   **Commerce MCP** --- authoritative customer and transactional facts.
+-   **Policy MCP** --- authoritative policy evidence.
+-   **Customer Support Agent** --- tool selection, reasoning, multi-turn
+    context, and customer-facing responses.
 
 ## Project Structure
 
-```text
-
+``` text
 eCommSupport-AI/
-
 │
-
 ├── commerce_mcp/
-
-│   ├── repositories/
-
-│   │   ├── order_repository.py
-
-│   │   ├── product_repository.py
-
-│   │   └── warranty_repository.py
-
-│   │
-
-│   ├── services/
-
-│   │   ├── order_service.py
-
-│   │   ├── product_service.py
-
-│   │   └── warranty_service.py
-
-│   │
-
-│   ├── tests/
-
-│   │   └── integration/
-
-│   │
-
-│   ├── db.py
-
-│   ├── server.py
-
-│   └── test_client.py
-
+│   ├── repositories/
+│   ├── services/
+│   ├── tests/
+│   ├── db.py
+│   ├── server.py
+│   └── test_client.py
 │
-
 ├── policy_mcp/
-
-│   ├── ingestion/
-
-│   │   ├── extract_pdf.py
-
-│   │   └── ...
-
-│   │
-
-│   ├── retrieval/
-
-│   │   ├── simple_retriever.py
-
-│   │   ├── hyde_retriever.py
-
-│   │   ├── multi_query_retriever.py
-
-│   │   └── adaptive_retriever.py
-
-│   │
-
-│   ├── rag/
-
-│   │   └── simple_rag.py
-
-│   │
-
-│   ├── services/
-
-│   │   └── policy_service.py
-
-│   │
-
-│   ├── tests/
-
-│   ├── server.py
-
-│   └── test_client.py
-
+│   ├── ingestion/
+│   ├── retrieval/
+│   ├── rag/
+│   ├── services/
+│   ├── tests/
+│   ├── server.py
+│   └── test_client.py
 │
-
 ├── customerSupportAgent/
-
-│   ├── __init__.py
-
-│   ├── prompt.py
-
-│   └── main.py
-
+│   ├── __init__.py
+│   ├── prompt.py
+│   └── main.py
 │
-
 ├── .env
-
 ├── docker-compose.yml
-
 └── README.md
-
 ```
 
 ## Commerce MCP
 
-The Commerce MCP provides structured access to transactional e-commerce data stored in MySQL.
+The Commerce MCP provides structured access to transactional e-commerce
+data stored in MySQL.
 
 ### Available Tools
 
 #### `search_products`
 
-Search the active product catalog using structured filters such as category, brand, price range, and stock availability.
+Search the active product catalog using structured filters such as
+category, brand, price range, and stock availability.
 
 #### `get_product_details`
 
@@ -194,75 +96,69 @@ List recent orders belonging to a customer.
 
 #### `check_order_status`
 
-Retrieve order and shipment status using a customer ID and customer-facing order number.
+Retrieve order and shipment status using a customer ID and
+customer-facing order number.
 
 #### `get_order_details`
 
-Retrieve an order and its itemized contents using a customer ID and customer-facing order number. The tool resolves order items and product information, including product ID, SKU, product name, quantity, unit price, and line total.
+Retrieve an order and its itemized contents using a customer ID and
+customer-facing order number.
+
+The tool resolves order items and product information, including:
+
+-   product ID
+-   SKU
+-   product name
+-   quantity
+-   unit price
+-   line total
 
 #### `get_warranty_details`
 
-Retrieve warranty ownership, plan, status, and validity information
+Retrieve purchased warranty information for a product in a customer's
+order.
 
-for the product purchased in a customer's order.
+The tool uses the customer ID and order number to resolve the
+corresponding order item and product internally. The customer does not
+need to know the internal product ID.
 
-The tool accepts:
+It returns factual warranty information such as:
 
-- `customer_id`
+-   product
+-   warranty plan
+-   warranty status
+-   validity period
+-   warranty purchase price
 
-- `order_number`
+Warranty coverage rules are policy knowledge and are retrieved through
+Policy MCP rather than implemented as Commerce MCP business logic.
 
-The Commerce MCP resolves the corresponding order item and product
+#### `list_customer_addresses`
 
-internally. The customer or support agent does not need to know the
+List saved shipping addresses belonging to a customer.
 
-internal `product_id`.
-
-The tool returns factual warranty ownership information such as:
-
-- product
-
-- warranty plan
-
-- warranty status
-
-- validity period
-
-- purchase information
-
-Detailed warranty coverage rules are policy knowledge and are retrieved
-
-through the Policy MCP rather than stored as Commerce MCP logic.
+This is used during checkout so the customer can select a saved address
+without knowing an internal `address_id`. The current agent does not
+create or modify customer addresses.
 
 #### `place_order`
 
-Place a single-product order after customer confirmation.
+Place a single-product order after explicit customer confirmation.
 
 The operation includes:
 
-- customer validation
-
-- shipping-address ownership validation
-
-- product availability validation
-
-- database-authoritative pricing
-
-- stock validation
-
-- inventory locking
-
-- order creation
-
-- order-item creation
-
-- initial shipment creation
-
-- shipping-address snapshot
-
-- inventory decrement
-
-- idempotency protection
+-   customer validation
+-   shipping-address ownership validation
+-   product availability validation
+-   database-authoritative pricing
+-   stock validation
+-   inventory locking
+-   order creation
+-   order-item creation
+-   initial shipment creation
+-   shipping-address snapshot
+-   inventory decrement
+-   idempotency protection
 
 The entire operation executes inside a database transaction.
 
@@ -270,27 +166,23 @@ Order placement currently supports one product per order.
 
 ## Order Identifiers
 
-Orders use separate internal and external identifiers.
+Orders use separate internal and external identifiers:
 
-```text
-
+``` text
 order_id
-
-    Internal MySQL primary key.
+    Internal MySQL primary key.
 
 order_number
-
-    Customer-facing generated order identifier.
+    Customer-facing generated order identifier.
 
 idempotency_key
-
-    Identifies a specific order-placement request and prevents
-
-    duplicate orders when a request is retried.
-
+    Identifies an order-placement request and prevents duplicate
+    orders when the same request is retried.
 ```
 
-The calling application is responsible for generating and reusing the idempotency key for retries.
+The Commerce MCP already enforces idempotency. Moving idempotency-key
+generation and lifecycle management fully into the calling application
+remains a post-evaluation hardening task.
 
 ## Database
 
@@ -298,523 +190,378 @@ Commerce data is stored in MySQL.
 
 Major entities include:
 
-```text
-
+``` text
 customers
-
 customer_addresses
-
 products
-
 orders
-
 order_items
-
 shipments
-
 shipment_items
-
 shipment_status_history
-
 warranty_plans
-
 customer_warranties
-
 ```
 
-Historical shipping addresses are stored as snapshots on shipments rather than relying on the customer's current address.
+Historical shipping addresses are stored as shipment snapshots rather
+than relying on the customer's current saved address.
 
 ## Policy MCP
 
-The Policy MCP retrieves relevant company policy evidence for the Customer Support Agent.
+The Policy MCP retrieves relevant company policy evidence for the
+Customer Support Agent. It does **not** generate the final
+customer-facing answer.
 
-It does **not** generate the final customer-facing answer.
-
-Instead:
-
-```text
-
+``` text
 Customer question
-
-      ↓
-
+      ↓
 Policy MCP
-
-      ↓
-
+      ↓
 Policy retrieval
-
-      ↓
-
+      ↓
 Relevant policy chunks + source metadata
-
-      ↓
-
+      ↓
 Customer Support Agent
-
-      ↓
-
+      ↓
 Final answer
-
 ```
 
-This keeps policy retrieval separate from final reasoning and avoids unnecessary nested answer generation.
+This keeps retrieval separate from final reasoning and prevents
+retrieved or generated intermediate text from being treated as the final
+policy answer.
 
 ### Policy Ingestion
 
 The current ingestion pipeline is:
 
-```text
-
+``` text
 Policy PDF
-
-    ↓
-
+    ↓
 PDF text extraction
-
-    ↓
-
+    ↓
 Text chunking
-
-    ↓
-
+    ↓
 Embedding generation
-
-    ↓
-
+    ↓
 Pinecone
-
 ```
 
 Policy chunk metadata currently includes:
 
-- country
-
-- policy version
-
-- source document
-
-Section/category metadata is not assumed unless it can be reliably derived from the source document.
+-   country
+-   policy version
+-   source document
 
 ### Retrieval Strategies
 
-Three retrieval strategies have been implemented.
+The Policy MCP supports three retrieval strategies.
 
 #### Simple Semantic Retrieval
 
-The original customer query is embedded directly.
-
-```text
-
+``` text
 Customer query
-
-    ↓
-
+    ↓
 Embedding
-
-    ↓
-
+    ↓
 Pinecone similarity search
-
-    ↓
-
+    ↓
 Top-K policy chunks
-
 ```
 
 #### HyDE Retrieval
 
-HyDE generates a hypothetical answer/document representation before retrieval.
+HyDE generates a hypothetical answer/document representation before
+retrieval.
 
-```text
-
+``` text
 Customer query
-
-    ↓
-
+    ↓
 LLM generates hypothetical answer
-
-    ↓
-
+    ↓
 Embedding
-
-    ↓
-
+    ↓
 Pinecone similarity search
-
-    ↓
-
+    ↓
 Top-K real policy chunks
-
 ```
 
-The hypothetical content is used **only for retrieval**. It is not treated as real company policy and is not returned as authoritative evidence.
+The hypothetical content is used **only for retrieval** and is never
+treated as authoritative company policy.
 
 #### Multi-Query Retrieval
 
-The customer query is rewritten into multiple semantic variations.
-
-```text
-
+``` text
 Customer query
-
-    ↓
-
+    ↓
 Multiple query variations
-
-    ↓
-
+    ↓
 Multiple embedding searches
-
-    ↓
-
+    ↓
 Merge + deduplicate results
-
-    ↓
-
+    ↓
 Top-K policy chunks
-
 ```
-
-Multi-Query is intended to improve retrieval coverage when a single query representation is insufficient.
 
 ### Adaptive Retrieval
 
-The Policy MCP currently combines the three strategies through adaptive retrieval.
+The Policy MCP combines these strategies through adaptive routing:
 
-```text
-
+``` text
 Simple Retrieval
-
-      ↓
-
+      ↓
 Strong enough?
-
- ├── Yes → return evidence
-
- └── No
-
-       ↓
-
-      HyDE
-
-       ↓
-
+ ├── Yes → return evidence
+ └── No
+       ↓
+      HyDE
+       ↓
 Strong enough?
-
- ├── Yes → return evidence
-
- └── No
-
-       ↓
-
-   Multi-Query
-
-       ↓
-
-   return evidence
-
+ ├── Yes → return evidence
+ └── No
+       ↓
+   Multi-Query
+       ↓
+   return evidence
 ```
 
-The current similarity-score thresholds are provisional engineering heuristics.
-
-They should eventually be calibrated using a policy retrieval evaluation dataset rather than treated as permanent values.
-
-The adaptive retriever avoids automatically running every retrieval strategy for every request, reducing unnecessary latency and model/embedding calls.
+The current similarity-score thresholds are provisional engineering
+heuristics. They should be calibrated through retrieval evaluations
+rather than treated as permanent values.
 
 ### Policy MCP Output
 
-Policy MCP returns evidence such as:
+Policy MCP returns evidence including:
 
-```text
-
+``` text
 chunk_id
-
 text
-
 similarity score
-
 source document
-
 policy version
-
 retrieval strategy
-
 ```
 
-The Customer Support Agent is responsible for interpreting this evidence.
+The Customer Support Agent is responsible for interpreting the retrieved
+evidence.
 
 ## Customer Support Agent
 
-The main customer-facing agent is implemented using the OpenAI Agents SDK with native MCP integration.
+The customer-facing agent is implemented with the **OpenAI Agents SDK**
+and native MCP integration.
 
-The agent connects to both MCP servers:
+It connects to:
 
-```text
-
+``` text
 Commerce MCP → http://localhost:8001/mcp
-
-Policy MCP   → http://localhost:8002/mcp
-
+Policy MCP   → http://localhost:8002/mcp
 ```
-
-The Agents SDK exposes the MCP tools directly to the model and handles the tool execution loop.
 
 The agent does not directly access MySQL or Pinecone.
 
-### Agent Flow
+### Agent Responsibilities
 
-```text
+The agent can:
 
-Customer
+-   select Commerce and Policy MCP tools autonomously
+-   answer commerce-only questions
+-   answer policy-only questions
+-   combine Commerce facts with Policy evidence
+-   maintain context across multiple conversation turns
+-   reuse previously retrieved tool results when appropriate
+-   require explicit customer confirmation before order placement
+-   resolve saved shipping addresses without exposing internal address
+    IDs
 
-    ↓
+### Example Multi-Turn Flow
 
-Customer Support Agent
+``` text
+Customer:
+"Where is order ORD-2026-000001?"
 
-    ↓
-
-Determine required tools
-
-    │
-
-    ├── Commerce MCP
-
-    │      ↓
-
-    │   transactional facts
-
-    │
-
-    └── Policy MCP
-
-           ↓
-
-        policy evidence
-
-    ↓
-
-Combine retrieved information
-
-    ↓
-
-Customer-facing response
-
-```
-
-### Example: Order Status
-
-```text
+→ check_order_status
 
 Customer:
+"What is included in the order?"
 
-"Where is order ORD-2026-000001 for customer 1?"
-
-Agent
-
-    ↓
-
-Commerce MCP
-
-    ↓
-
-Order + shipment information
-
-    ↓
-
-Customer-facing status
-
-```
-
-### Example: General Policy Question
-
-```text
+→ get_order_details
 
 Customer:
+"Do I have a warranty on it?"
 
-"What is the standard return period?"
+→ get_warranty_details
 
-Agent
+Customer:
+"How much did I pay for the warranty?"
 
-    ↓
-
-Policy MCP
-
-    ↓
-
-Relevant return-policy evidence
-
-    ↓
-
-Customer-facing answer
-
+→ answer from existing session context
 ```
 
-### Example: Customer-Specific Return Question
+### Customer-Specific Return / Warranty Flow
 
-The intended multi-tool workflow is:
-
-```text
-
-Customer
-
-    ↓
-
+``` text
+Customer question
+      ↓
 Retrieve order/delivery facts
-
-    ↓
-
+      ↓
 Verify purchased warranty
-
-    ↓
-
-Retrieve relevant policy evidence
-
-    ↓
-
-Combine commerce facts + policy evidence
-
-    ↓
-
-Customer-facing answer
-
+      ↓
+Retrieve applicable policy evidence
+      ↓
+Combine Commerce facts + Policy evidence
+      ↓
+Grounded customer-facing answer
 ```
 
-The agent is instructed not to invent transactional or policy information and to verify customer-specific facts through Commerce MCP.
+The agent is instructed not to invent transactional or policy facts.
+
+### Order Placement Flow
+
+The current checkout flow is:
+
+``` text
+Customer purchase intent
+      ↓
+Product lookup / validation
+      ↓
+Quantity selection
+      ↓
+Retrieve saved customer addresses
+      ↓
+Customer selects saved address
+      ↓
+Explicit final confirmation
+      ↓
+place_order
+```
+
+Customers are not asked for internal product or address IDs.
+
+New shipping addresses are intentionally outside the current agent
+scope. Orders can only be placed using existing saved customer
+addresses.
 
 ### Multi-Turn Sessions and Compaction
 
-The terminal agent supports multi-turn conversations. A session is created once when the application starts and reused across successive Runner.run(...) calls, allowing follow-up questions to reuse customer, order, product, warranty, and prior tool-result context without requiring the customer to repeat it.
+The terminal agent supports multi-turn conversations.
 
-Session history is backed by SQLiteSession and wrapped with OpenAIResponsesCompactionSession. As a conversation grows, the SDK can compact older history into a smaller representation while retaining the context needed for later turns.
+A session is created once when the application starts and reused across
+successive `Runner.run(...)` calls. This allows follow-up questions to
+reuse customer, order, product, warranty, and previous tool-result
+context without requiring the customer to repeat it.
 
-Development diagnostics currently expose:
+Session history is backed by `SQLiteSession` and wrapped with
+`OpenAIResponsesCompactionSession`.
 
-MCP tool start/end events through RunHooks
+As the conversation grows, older history can be compacted into a smaller
+representation while preserving useful context for later turns.
 
-MCP tool results
+Development diagnostics expose:
 
-input, output, and total token usage per run
-
-stored session-item count and item types
-
-compaction items, which can be inspected to verify that history compaction occurred
-
-This setup provides short-term conversational memory while controlling the growth of long-running session context.
+-   MCP tool start/end events through `RunHooks`
+-   MCP tool results
+-   input, output, and total token usage per run
+-   stored session-item count
+-   session item types
+-   compaction items
 
 ### Grounding and Troubleshooting Boundary
 
-The agent must ground transactional facts in Commerce MCP and policy claims in Policy MCP evidence. Product-specific troubleshooting, diagnostic, reset, disassembly, or repair instructions should not be invented when approved support documentation has not been retrieved. Product support/troubleshooting documentation is therefore a future RAG corpus expansion.
+Transactional facts must come from Commerce MCP and policy claims must
+be grounded in Policy MCP evidence.
+
+The agent should not invent product-specific diagnostic, reset,
+disassembly, repair, or troubleshooting procedures when approved support
+documentation has not been retrieved.
+
+Product support/troubleshooting documentation can be added to the RAG
+corpus later if that capability is required.
 
 ## Running the System
 
-The current development setup runs the two MCP servers and Customer Support Agent as separate processes.
+The current development setup runs the two MCP servers and Customer
+Support Agent as separate processes.
 
 ### 1. Start Commerce MCP
 
-```powershell
-
+``` powershell
 python -m commerce_mcp.server
-
 ```
 
-Commerce MCP currently uses Streamable HTTP on port `8001`.
+Commerce MCP uses Streamable HTTP on port `8001`.
 
 ### 2. Start Policy MCP
 
-```powershell
-
+``` powershell
 python -m policy_mcp.server
-
 ```
 
-Policy MCP currently uses Streamable HTTP on port `8002`.
+Policy MCP uses Streamable HTTP on port `8002`.
 
 ### 3. Start Customer Support Agent
 
-```powershell
-
+``` powershell
 python -m customerSupportAgent.main
-
 ```
 
-The agent connects to both MCP servers and accepts customer queries from the terminal.
+The agent connects to both MCP servers and accepts customer queries from
+the terminal.
 
 ## Testing MCP Servers
 
-The MCP servers can also be tested independently.
-
 Commerce MCP:
 
-```powershell
-
+``` powershell
 python -m commerce_mcp.test_client
-
 ```
 
 Policy MCP:
 
-```powershell
-
+``` powershell
 python -m policy_mcp.test_client
-
 ```
-
-These clients discover the available MCP tools and invoke them directly.
 
 ## Running Tests
 
 Run all tests:
 
-```powershell
-
+``` powershell
 python -m pytest -v
-
 ```
 
 Run Commerce MCP integration tests:
 
-```powershell
-
+``` powershell
 python -m pytest commerce_mcp/tests/integration -v
-
 ```
 
 Run Policy adaptive-retrieval tests:
 
-```powershell
-
+``` powershell
 python -m pytest policy_mcp/tests/test_adaptive_retriever.py -v -s
-
 ```
 
 Run deterministic adaptive-routing tests:
 
-```powershell
-
+``` powershell
 python -m pytest policy_mcp/tests/test_adaptive_routing.py -v
-
 ```
 
 Adaptive routing tests cover:
 
-```text
-
+``` text
 Strong Simple retrieval
-
 → Simple selected
 
 Weak Simple + strong HyDE
-
 → HyDE selected
 
 Weak Simple + weak HyDE
-
 → Multi-Query selected
-
 ```
 
-> Note: some Commerce MCP order-placement integration tests create orders and modify inventory. A dedicated test database or automatic test cleanup should be added later.
+> **Note:** Some Commerce MCP order-placement integration tests create
+> orders and modify inventory. A dedicated test database or automatic
+> test cleanup should be added later.
 
 ## Environment Variables
 
@@ -822,34 +569,24 @@ Configuration and credentials are loaded from `.env`.
 
 Example:
 
-```text
-
+``` text
 DB_HOST=localhost
-
 DB_PORT=3306
-
 DB_NAME=ecomm_support
-
 DB_USER=<username>
-
 DB_PASSWORD=<password>
 
 OPENAI_API_KEY=<key>
 
 PINECONE_API_KEY=<key>
-
 PINECONE_INDEX_NAME=<index>
 
 COMMERCE_MCP_URL=http://localhost:8001/mcp
-
 POLICY_MCP_URL=http://localhost:8002/mcp
 
 LANGSMITH_TRACING=true
-
 LANGSMITH_PROJECT=ecomm-support-ai
-
 LANGSMITH_API_KEY=<key>
-
 ```
 
 Do not commit `.env` or real credentials to source control.
@@ -858,182 +595,131 @@ Do not commit `.env` or real credentials to source control.
 
 ### Commerce MCP
 
-MySQL schema
-
-SQLAlchemy connection pooling
-
-Product repository/service
-
-Order repository/service
-
-Warranty repository/service
-
-MCP Streamable HTTP server
-
-Product search
-
-Product details
-
-Customer order listing
-
-Order/shipment status
-
-Itemized order details (get_order_details)
-
-Warranty details
-
-Transactional order placement
-
-Idempotency protection
-
-Unit and integration testing
+-   [x] MySQL schema
+-   [x] SQLAlchemy connection pooling
+-   [x] Product repository/service
+-   [x] Order repository/service
+-   [x] Warranty repository/service
+-   [x] MCP Streamable HTTP server
+-   [x] Product search
+-   [x] Product details
+-   [x] Customer order listing
+-   [x] Order/shipment status
+-   [x] Itemized order details (`get_order_details`)
+-   [x] Warranty details
+-   [x] Saved customer address lookup
+-   [x] Transactional order placement
+-   [x] Idempotency protection in Commerce MCP
+-   [x] Unit and integration testing
 
 ### Policy MCP
 
-Policy PDF
-
-PDF text extraction
-
-Policy chunking
-
-Embeddings
-
-Pinecone integration
-
-Simple semantic retrieval
-
-HyDE retrieval
-
-Multi-Query retrieval
-
-Adaptive retrieval
-
-Policy evidence service
-
-MCP Streamable HTTP server
-
-Policy search tool
-
-Integration testing
-
-Deterministic adaptive-routing tests
+-   [x] Policy PDF ingestion
+-   [x] PDF text extraction
+-   [x] Policy chunking
+-   [x] Embeddings
+-   [x] Pinecone integration
+-   [x] Simple semantic retrieval
+-   [x] HyDE retrieval
+-   [x] Multi-Query retrieval
+-   [x] Adaptive retrieval
+-   [x] Policy evidence service
+-   [x] MCP Streamable HTTP server
+-   [x] Policy search tool
+-   [x] Integration testing
+-   [x] Deterministic adaptive-routing tests
 
 ### Customer Support Agent
 
-OpenAI Agents SDK integration
+-   [x] OpenAI Agents SDK integration
+-   [x] Native MCP integration
+-   [x] Commerce MCP integration
+-   [x] Policy MCP integration
+-   [x] Autonomous tool selection
+-   [x] Commerce-only query handling
+-   [x] Policy-only query handling
+-   [x] Multi-tool query handling
+-   [x] Order-based warranty lookup
+-   [x] Warranty verification from customer ID + order number
+-   [x] Saved-address selection for checkout
+-   [x] Customer confirmation flow for order placement
+-   [x] Multi-turn conversation/session handling
+-   [x] SQLite-backed session history
+-   [x] Responses-based session compaction
+-   [x] Tool invocation logging with `RunHooks`
+-   [x] Token/session diagnostics
+-   [ ] Retrieval and agent evaluation framework
+-   [ ] Application-managed idempotency-key lifecycle
+-   [x] Verify/complete LangSmith tracing
+-   [ ] Docker deployment
 
-Native MCP integration
+## Next Phase: Evaluations
 
-Commerce MCP integration
+The next major development phase is evaluation.
 
-Policy MCP integration
+The evaluation framework should measure:
 
-Autonomous tool selection
-
-Commerce-only query handling
-
-Policy-only query handling
-
-Multi-tool query handling
-
-Order-based warranty lookup
-
-Warranty verification from customer ID + order number
-
-Detailed warranty-policy document ingestion
-
-Retrieval evaluation framework
-
-Customer confirmation flow for order placement
-
-Idempotency-key generation
-
-Multi-turn conversation/session handling
-
-SQLite-backed session history
-
-Responses-based session compaction
-
-Tool invocation logging with RunHooks
-
-Token/session diagnostics
-
-Docker deployment
-
-## Known Issues / Next Steps
-
-The next major development phase is evaluation: retrieval quality, tool selection, multi-turn context retention, grounded answer quality, and efficiency.
+-   retrieval quality
+-   correct tool selection
+-   unnecessary tool calls
+-   multi-turn context retention
+-   Commerce + Policy grounding
+-   answer correctness
+-   refusal to invent unsupported facts or troubleshooting steps
+-   order-placement confirmation behavior
+-   latency and token usage
 
 ### Retrieval Evaluation
 
-The current adaptive retrieval thresholds are provisional.
+The adaptive retrieval thresholds are currently provisional.
 
-A future evaluation dataset should compare:
+Evaluation should compare:
 
-- Simple retrieval
+-   Simple retrieval
+-   HyDE retrieval
+-   Multi-Query retrieval
+-   Recall@K
+-   expected-chunk ranking
+-   latency
+-   model/embedding cost
 
-- HyDE retrieval
+The results should be used to calibrate adaptive-routing thresholds and
+strategy.
 
-- Multi-Query retrieval
+## Planned Hardening
 
-- Recall@K
+After the evaluation baseline is established:
 
-- expected-chunk ranking
-
-- latency
-
-- model/embedding cost
-
-The evaluation results should determine the final adaptive-routing thresholds and strategy.
-
-### Additional Planned Work
-
-- Expand end-to-end multi-tool agent tests
-
-- Add customer confirmation flow for write operations
-
-- Generate and manage idempotency keys outside Commerce MCP
-
-- Complete/verify LangSmith tracing integration
-
-- Build agent and retrieval evaluation framework
-
-- Ingest detailed warranty-plan documents
-
-- Add approved product troubleshooting/support documentation to the RAG corpus
-
-- Containerize MCP servers and support agent
-
-- Add dedicated test database / automatic cleanup
+-   generate and manage idempotency keys in the application layer
+-   verify/complete LangSmith tracing
+-   expand end-to-end multi-tool agent tests
+-   add approved product troubleshooting/support documentation if
+    required
+-   containerize the MCP servers and support agent
+-   add a dedicated test database or automatic test cleanup
 
 ## Development Philosophy
 
-MCP servers expose controlled business capabilities rather than arbitrary database access.
+MCP servers expose controlled business capabilities rather than
+arbitrary database access.
 
-The language model does not generate SQL or directly modify commerce data. Business operations flow through explicit MCP tools, service-layer validation, repository logic, and transactional database operations.
+The language model does not generate SQL or directly modify commerce
+data. Business operations flow through explicit MCP tools, service-layer
+validation, repository logic, and transactional database operations.
 
-Structured commerce facts belong in MySQL.
+Structured commerce facts belong in MySQL. Semantic policy knowledge is
+retrieved through Pinecone and Policy MCP.
 
-Semantic policy knowledge is retrieved through Pinecone and the Policy MCP.
-
-The Customer Support Agent acts as the reasoning and orchestration layer:
-
-```text
-
+``` text
 Commerce facts
-
-      +
-
+      +
 Policy evidence
-
-      ↓
-
+      ↓
 Customer Support Agent
-
-      ↓
-
+      ↓
 Grounded customer response
-
 ```
 
-This separation keeps transactional operations deterministic while allowing the language model to reason over verified business facts and retrieved policy
+This separation keeps transactional operations deterministic while
+allowing the language model to reason over verified business facts and
+retrieved policy evidence.

@@ -1,10 +1,10 @@
 {
   "summary": {
-    "case_count": 6,
+    "case_count": 7,
     "tool_selection_pass_rate": 1.0,
     "error_count": 0,
-    "average_latency_seconds": 9.646423166675959,
-    "total_extra_tools": 1
+    "average_latency_seconds": 6.909981042857161,
+    "total_extra_tools": 2
   },
   "cases": [
     {
@@ -14,12 +14,21 @@
       "tools_called": [
         "check_order_status"
       ],
+      "tool_results": [
+        {
+          "tool": "check_order_status",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"ORDER_STATUS_FOUND\",\n  \"data\": {\n    \"order\": {\n      \"order_id\": 1,\n      \"customer_id\": 1,\n      \"order_status\": \"COMPLETED\",\n      \"total_amount\": \"1499.00\",\n      \"currency\": \"EUR\",\n      \"order_date\": \"2026-07-05T10:15:00\"\n    },\n    \"shipments\": [\n      {\n        \"shipment_id\": 1,\n        \"carrier\": \"DHL\",\n        \"tracking_number\": \"DHL-DE-100001\",\n        \"current_status\": \"DELIVERED\",\n        \"shipping_address\": \"{\\\"city\\\": \\\"Berlin\\\", \\\"name\\\": \\\"Anna Schmidt\\\", \\\"state\\\": \\\"Berlin\\\", \\\"postal_code\\\": \\\"10115\\\", \\\"country_code\\\": \\\"DE\\\", \\\"address_line1\\\": \\\"Invalidenstrasse 10\\\", \\\"address_line2\\\": null}\",\n        \"shipped_at\": \"2026-07-06T09:00:00\",\n        \"estimated_delivery_at\": \"2026-07-08T18:00:00\",\n        \"delivered_at\": \"2026-07-08T13:25:00\"\n      }\n    ]\n  }\n}"
+          }
+        }
+      ],
       "tool_selection_pass": true,
       "missing_tools": [],
       "forbidden_tools_used": [],
       "extra_tools": [],
-      "final_output": "Order **ORD-2026-000001** was delivered by **DHL** on **July 8, 2026 at 13:25**.\n\nTracking number: **DHL-DE-100001**",
-      "latency_seconds": 13.131384699954651,
+      "final_output": "Order **ORD-2026-000001** was delivered by **DHL** on **July 8, 2026 at 13:25**.\n\nTracking number: **DHL-DE-100001**  \nStatus: **Delivered**",
+      "latency_seconds": 8.112140899999986,
       "error": null
     },
     {
@@ -29,12 +38,21 @@
       "tools_called": [
         "get_order_details"
       ],
+      "tool_results": [
+        {
+          "tool": "get_order_details",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"ORDER_DETAILS_FOUND\",\n  \"data\": {\n    \"order\": {\n      \"order_id\": 1,\n      \"order_number\": \"ORD-2026-000001\",\n      \"order_status\": \"COMPLETED\",\n      \"total_amount\": \"1499.00\",\n      \"currency\": \"EUR\",\n      \"order_date\": \"2026-07-05T10:15:00\"\n    },\n    \"items\": [\n      {\n        \"order_item_id\": 1,\n        \"product_id\": 2,\n        \"sku\": \"LAP-LEN-X1C\",\n        \"product_name\": \"Lenovo ThinkPad X1 Carbon\",\n        \"quantity\": 1,\n        \"unit_price\": \"1499.00\",\n        \"line_total\": \"1499.00\"\n      }\n    ]\n  }\n}"
+          }
+        }
+      ],
       "tool_selection_pass": true,
       "missing_tools": [],
       "forbidden_tools_used": [],
       "extra_tools": [],
-      "final_output": "Order **ORD-2026-000001** includes:\n\n- **1 \u00d7 Lenovo ThinkPad X1 Carbon**\n- Unit price: **\u20ac1,499.00**\n- Total: **\u20ac1,499.00**",
-      "latency_seconds": 4.307575799990445,
+      "final_output": "Order **ORD-2026-000001** includes:\n\n- **1 \u00d7 Lenovo ThinkPad X1 Carbon**\n- Unit price: **\u20ac1,499.00**\n- Order total: **\u20ac1,499.00**",
+      "latency_seconds": 5.113079800000037,
       "error": null
     },
     {
@@ -44,12 +62,21 @@
       "tools_called": [
         "get_warranty_details"
       ],
+      "tool_results": [
+        {
+          "tool": "get_warranty_details",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"WARRANTY_FOUND\",\n  \"data\": {\n    \"order_number\": \"ORD-2026-000001\",\n    \"order_item_id\": 1,\n    \"product_id\": 2,\n    \"sku\": \"LAP-LEN-X1C\",\n    \"product_name\": \"Lenovo ThinkPad X1 Carbon\",\n    \"warranty_plan_id\": 2,\n    \"warranty_plan_name\": \"Extended Warranty - 2 Years\",\n    \"duration_months\": 24,\n    \"purchase_price\": \"169.00\",\n    \"valid_from\": \"2026-07-05\",\n    \"valid_until\": \"2028-07-04\",\n    \"status\": \"ACTIVE\",\n    \"has_extended_warranty\": true\n  }\n}"
+          }
+        }
+      ],
       "tool_selection_pass": true,
       "missing_tools": [],
       "forbidden_tools_used": [],
       "extra_tools": [],
-      "final_output": "For order **ORD-2026-000001**, you have an **active Extended Warranty \u2013 2 Years** for the **Lenovo ThinkPad X1 Carbon**.\n\n- Valid: **July 5, 2026 \u2013 July 4, 2028**\n- Warranty status: **Active**",
-      "latency_seconds": 4.191451900056563,
+      "final_output": "You have an **active Extended Warranty \u2013 2 Years** for your Lenovo ThinkPad X1 Carbon.\n\n- **Valid:** July 5, 2026 through July 4, 2028\n- **Status:** Active",
+      "latency_seconds": 3.3749285999999756,
       "error": null
     },
     {
@@ -57,16 +84,49 @@
       "customer_id": 1,
       "query": "I am customer 1. My laptop from order ORD-2026-000001 is damaged. Can I return it?",
       "tools_called": [
+        "get_order_details",
         "check_order_status",
         "get_warranty_details",
         "search_policy"
       ],
+      "tool_results": [
+        {
+          "tool": "get_order_details",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"ORDER_DETAILS_FOUND\",\n  \"data\": {\n    \"order\": {\n      \"order_id\": 1,\n      \"order_number\": \"ORD-2026-000001\",\n      \"order_status\": \"COMPLETED\",\n      \"total_amount\": \"1499.00\",\n      \"currency\": \"EUR\",\n      \"order_date\": \"2026-07-05T10:15:00\"\n    },\n    \"items\": [\n      {\n        \"order_item_id\": 1,\n        \"product_id\": 2,\n        \"sku\": \"LAP-LEN-X1C\",\n        \"product_name\": \"Lenovo ThinkPad X1 Carbon\",\n        \"quantity\": 1,\n        \"unit_price\": \"1499.00\",\n        \"line_total\": \"1499.00\"\n      }\n    ]\n  }\n}"
+          }
+        },
+        {
+          "tool": "check_order_status",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"ORDER_STATUS_FOUND\",\n  \"data\": {\n    \"order\": {\n      \"order_id\": 1,\n      \"customer_id\": 1,\n      \"order_status\": \"COMPLETED\",\n      \"total_amount\": \"1499.00\",\n      \"currency\": \"EUR\",\n      \"order_date\": \"2026-07-05T10:15:00\"\n    },\n    \"shipments\": [\n      {\n        \"shipment_id\": 1,\n        \"carrier\": \"DHL\",\n        \"tracking_number\": \"DHL-DE-100001\",\n        \"current_status\": \"DELIVERED\",\n        \"shipping_address\": \"{\\\"city\\\": \\\"Berlin\\\", \\\"name\\\": \\\"Anna Schmidt\\\", \\\"state\\\": \\\"Berlin\\\", \\\"postal_code\\\": \\\"10115\\\", \\\"country_code\\\": \\\"DE\\\", \\\"address_line1\\\": \\\"Invalidenstrasse 10\\\", \\\"address_line2\\\": null}\",\n        \"shipped_at\": \"2026-07-06T09:00:00\",\n        \"estimated_delivery_at\": \"2026-07-08T18:00:00\",\n        \"delivered_at\": \"2026-07-08T13:25:00\"\n      }\n    ]\n  }\n}"
+          }
+        },
+        {
+          "tool": "get_warranty_details",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"WARRANTY_FOUND\",\n  \"data\": {\n    \"order_number\": \"ORD-2026-000001\",\n    \"order_item_id\": 1,\n    \"product_id\": 2,\n    \"sku\": \"LAP-LEN-X1C\",\n    \"product_name\": \"Lenovo ThinkPad X1 Carbon\",\n    \"warranty_plan_id\": 2,\n    \"warranty_plan_name\": \"Extended Warranty - 2 Years\",\n    \"duration_months\": 24,\n    \"purchase_price\": \"169.00\",\n    \"valid_from\": \"2026-07-05\",\n    \"valid_until\": \"2028-07-04\",\n    \"status\": \"ACTIVE\",\n    \"has_extended_warranty\": true\n  }\n}"
+          }
+        },
+        {
+          "tool": "search_policy",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"POLICY_EVIDENCE_FOUND\",\n  \"strategy\": \"simple\",\n  \"count\": 5,\n  \"results\": [\n    {\n      \"chunk_id\": \"return_policy_de_2026-0002\",\n      \"score\": 0.66775465,\n      \"text\": \"necessary to inspect the product. Returned items may be inspected before a refund is approved.\\n3. Damaged or Defective Products\\nIf a product arrives damaged, is defective on arrival, or becomes unusable due to a manufacturing defect, the\\ncustomer should contact support as soon as reasonably possible. Reports made within 14 calendar days of\\ndelivery will be handled under the expedited damaged-item process.\\nFor damage reported after 14 days, the applicable remedy depends on the standard return window, statutory\\nconsumer rights, and any active extended warranty or protection plan purchased for the item. Support may request\\nphotos, diagnostic information, or other evidence before approving a replacement, repair, or refund.\\n4. Electronics and Opened Products\\nOpened electronics can still be eligible for return within the standard return period if the product has only been\\ninspected or tested in a reasonable manner. Products showing accidental damage, misuse, unauthorized\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    },\n    {\n      \"chunk_id\": \"return_policy_de_2026-0004\",\n      \"score\": 0.644023895,\n      \"text\": \"terms. The exact coverage rules must be read together with the customer's purchased plan.\\nExample: a damaged laptop reported 45 days after delivery is outside the standard 30-day return window. If the\\ncustomer has an active extended warranty, the item may still qualify for a repair, replacement, or another remedy\\nunder the warranty terms, but a standard return is not automatically guaranteed.\\n6. Non-Returnable or Restricted Items\\nCertain goods may be restricted from change-of-mind returns for hygiene, licensing, personalization, or regulatory\\nreasons. Examples can include personalized products, activated digital licenses, and certain sealed\\nhygiene-sensitive goods once opened. This restriction does not remove statutory rights relating to defective\\nproducts.\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    },\n    {\n      \"chunk_id\": \"return_policy_de_2026-0003\",\n      \"score\": 0.582579195,\n      \"text\": \"inspected or tested in a reasonable manner. Products showing accidental damage, misuse, unauthorized\\nmodification, or missing critical components may be excluded from the standard change-of-mind return process.\\nWhere an electronics product is defective rather than merely unwanted, warranty and statutory remedies may\\napply even when the standard change-of-mind return window has expired.\\n5. Extended Warranty and Protection Plans\\nAn extended warranty or protection plan does not automatically extend the standard 30-day change-of-mind return\\nperiod. Instead, it provides additional remedies for covered faults or damage after the standard return period has\\nended.\\nIf a customer has an active extended warranty, support must first confirm the specific plan purchased and its\\nvalidity period. Coverage may include repair, replacement, or other remedies depending on the applicable warranty\\nterms. The exact coverage rules must be read together with the customer's purchased plan.\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    },\n    {\n      \"chunk_id\": \"return_policy_de_2026-0005\",\n      \"score\": 0.543817282,\n      \"text\": \"--- PAGE 2 ---\\n7. Refund Method and Timing\\nApproved refunds are normally issued to the original payment method. Refund processing generally begins after\\nthe returned item has been received and, where necessary, inspected. Customers should allow up to 10 business\\ndays after approval for the refund to appear, depending on the payment provider.\\n8. Return Shipping\\nFor eligible damaged or defective products, eComm Support will normally provide a prepaid return method. For\\nchange-of-mind returns, return shipping charges may be the customer's responsibility unless otherwise stated\\nduring the return process.\\n9. Missing Packaging or Accessories\\nMissing original packaging does not by itself make a defective-product claim invalid. However, where accessories\\nor components that were supplied with the product are missing, the available remedy may be adjusted where\\nlegally permitted. For standard change-of-mind returns, customers should return all supplied accessories where\\nreasonably possible.\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    },\n    {\n      \"chunk_id\": \"return_policy_de_2026-0006\",\n      \"score\": 0.508084118,\n      \"text\": \"legally permitted. For standard change-of-mind returns, customers should return all supplied accessories where\\nreasonably possible.\\n10. Exceptions and Escalation\\nIf the standard return policy, warranty terms, and statutory rights appear to conflict, the customer should not be\\ndenied automatically. The case must be escalated for review using the most favorable applicable legal or\\ncontractual remedy. Support agents must not invent policy exceptions that are not supported by the applicable\\npolicy or warranty terms.\\nPolicy Attribute\\nValue\\nCountry\\nDE\\nVersion\\n2026.1\\nEffective Date\\n1 January 2026\\nSource\\neComm Support Return Policy\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    }\n  ]\n}"
+          }
+        }
+      ],
       "tool_selection_pass": true,
       "missing_tools": [],
       "forbidden_tools_used": [],
-      "extra_tools": [],
-      "final_output": "Your Lenovo ThinkPad X1 Carbon was delivered on **July 8, 2026**, and your **2-year extended warranty is active through July 4, 2028**.\n\nYou may be eligible for a return if it is within the standard **30-day return period**. If reported after that, accidental damage may be excluded from a standard return, but covered defects or damage may qualify for **repair, replacement, or another warranty remedy**. Support may request photos or diagnostic information.\n\nPlease provide when the damage occurred and whether it was accidental or due to a product defect.",
-      "latency_seconds": 16.292486699996516,
+      "extra_tools": [
+        "get_order_details"
+      ],
+      "final_output": "Your Lenovo ThinkPad X1 Carbon was delivered on **July 8, 2026**, and its order is completed. You have an active **2-year extended warranty**, valid through **July 4, 2028**.\n\n- Damage reported within **14 days of delivery** qualifies for expedited damaged-item handling.\n- The standard return period is **30 days**, but the extended warranty does **not automatically extend** that period.\n- After the return window, a covered fault or damage may qualify for repair, replacement, or another remedy under the warranty terms.\n- Accidental damage, misuse, or unauthorized modifications may be excluded.\n\nPlease contact support as soon as possible with photos and a description of the damage. The item may need inspection before a remedy is approved.",
+      "latency_seconds": 7.366645700000049,
       "error": null
     },
     {
@@ -76,12 +136,21 @@
       "tools_called": [
         "search_policy"
       ],
+      "tool_results": [
+        {
+          "tool": "search_policy",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"POLICY_EVIDENCE_FOUND\",\n  \"strategy\": \"hyde\",\n  \"count\": 3,\n  \"results\": [\n    {\n      \"chunk_id\": \"return_policy_de_2026-0001\",\n      \"score\": 0.717669785,\n      \"text\": \"--- PAGE 1 ---\\neComm Support - Germany Return Policy\\n Policy Version: 2026.1    |    Effective Date: 1 January 2026    |    Country: DE\\n1. Purpose and Scope\\nThis policy defines the standard return, refund, exchange, and damaged-item rules for purchases made through\\nthe eComm Support online store in Germany. It applies to consumer purchases unless a product-specific warranty,\\nstatutory right, or separate contractual term provides a more favorable remedy.\\n2. Standard Returns\\nMost unused products may be returned within 30 calendar days from the date of delivery. Products should be\\nreturned with the original accessories, manuals, and packaging where reasonably possible. A missing outer\\nshipping carton does not automatically make a return ineligible.\\nIf a customer simply changes their mind, the product must not show signs of misuse beyond what is reasonably\\nnecessary to inspect the product. Returned items may be inspected before a refund is approved.\\n3. Damaged or Defective Products\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    },\n    {\n      \"chunk_id\": \"return_policy_de_2026-0006\",\n      \"score\": 0.56145364,\n      \"text\": \"legally permitted. For standard change-of-mind returns, customers should return all supplied accessories where\\nreasonably possible.\\n10. Exceptions and Escalation\\nIf the standard return policy, warranty terms, and statutory rights appear to conflict, the customer should not be\\ndenied automatically. The case must be escalated for review using the most favorable applicable legal or\\ncontractual remedy. Support agents must not invent policy exceptions that are not supported by the applicable\\npolicy or warranty terms.\\nPolicy Attribute\\nValue\\nCountry\\nDE\\nVersion\\n2026.1\\nEffective Date\\n1 January 2026\\nSource\\neComm Support Return Policy\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    },\n    {\n      \"chunk_id\": \"return_policy_de_2026-0002\",\n      \"score\": 0.548959672,\n      \"text\": \"necessary to inspect the product. Returned items may be inspected before a refund is approved.\\n3. Damaged or Defective Products\\nIf a product arrives damaged, is defective on arrival, or becomes unusable due to a manufacturing defect, the\\ncustomer should contact support as soon as reasonably possible. Reports made within 14 calendar days of\\ndelivery will be handled under the expedited damaged-item process.\\nFor damage reported after 14 days, the applicable remedy depends on the standard return window, statutory\\nconsumer rights, and any active extended warranty or protection plan purchased for the item. Support may request\\nphotos, diagnostic information, or other evidence before approving a replacement, repair, or refund.\\n4. Electronics and Opened Products\\nOpened electronics can still be eligible for return within the standard return period if the product has only been\\ninspected or tested in a reasonable manner. Products showing accidental damage, misuse, unauthorized\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    }\n  ]\n}"
+          }
+        }
+      ],
       "tool_selection_pass": true,
       "missing_tools": [],
       "forbidden_tools_used": [],
       "extra_tools": [],
-      "final_output": "In Germany, most unused products can be returned within **30 calendar days of delivery**, subject to the return conditions.",
-      "latency_seconds": 13.174634200055152,
+      "final_output": "In Germany, most unused products can be returned within **30 calendar days of delivery**. They should preferably include the original accessories, manuals, and packaging, and must not show misuse beyond reasonable inspection.",
+      "latency_seconds": 14.848920700000008,
       "error": null
     },
     {
@@ -89,17 +158,73 @@
       "customer_id": 1,
       "query": "I want to buy the Sony WH-1000XM5.",
       "tools_called": [
-        "search_products",
-        "list_customer_addresses"
+        "search_products"
+      ],
+      "tool_results": [
+        {
+          "tool": "search_products",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"PRODUCTS_FOUND\",\n  \"count\": 1,\n  \"data\": [\n    {\n      \"product_id\": 6,\n      \"sku\": \"HEAD-SONY-XM5\",\n      \"name\": \"Sony WH-1000XM5\",\n      \"category\": \"Headphones\",\n      \"brand\": \"Sony\",\n      \"price\": \"349.00\",\n      \"currency\": \"EUR\",\n      \"stock_quantity\": 30\n    }\n  ]\n}"
+          }
+        }
+      ],
+      "tool_selection_pass": true,
+      "missing_tools": [],
+      "forbidden_tools_used": [],
+      "extra_tools": [],
+      "final_output": "The Sony WH-1000XM5 is available for \u20ac349.00, with 30 units in stock.\n\nWould you like to order one? If so, please confirm the quantity and choose a saved shipping address.",
+      "latency_seconds": 4.101733100000047,
+      "error": null
+    },
+    {
+      "case_id": "damaged_return_001",
+      "customer_id": 1,
+      "query": "My laptop from order ORD-2026-000001 is damaged. Can I return it?",
+      "tools_called": [
+        "get_order_details",
+        "check_order_status",
+        "get_warranty_details",
+        "search_policy"
+      ],
+      "tool_results": [
+        {
+          "tool": "get_order_details",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"ORDER_DETAILS_FOUND\",\n  \"data\": {\n    \"order\": {\n      \"order_id\": 1,\n      \"order_number\": \"ORD-2026-000001\",\n      \"order_status\": \"COMPLETED\",\n      \"total_amount\": \"1499.00\",\n      \"currency\": \"EUR\",\n      \"order_date\": \"2026-07-05T10:15:00\"\n    },\n    \"items\": [\n      {\n        \"order_item_id\": 1,\n        \"product_id\": 2,\n        \"sku\": \"LAP-LEN-X1C\",\n        \"product_name\": \"Lenovo ThinkPad X1 Carbon\",\n        \"quantity\": 1,\n        \"unit_price\": \"1499.00\",\n        \"line_total\": \"1499.00\"\n      }\n    ]\n  }\n}"
+          }
+        },
+        {
+          "tool": "check_order_status",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"ORDER_STATUS_FOUND\",\n  \"data\": {\n    \"order\": {\n      \"order_id\": 1,\n      \"customer_id\": 1,\n      \"order_status\": \"COMPLETED\",\n      \"total_amount\": \"1499.00\",\n      \"currency\": \"EUR\",\n      \"order_date\": \"2026-07-05T10:15:00\"\n    },\n    \"shipments\": [\n      {\n        \"shipment_id\": 1,\n        \"carrier\": \"DHL\",\n        \"tracking_number\": \"DHL-DE-100001\",\n        \"current_status\": \"DELIVERED\",\n        \"shipping_address\": \"{\\\"city\\\": \\\"Berlin\\\", \\\"name\\\": \\\"Anna Schmidt\\\", \\\"state\\\": \\\"Berlin\\\", \\\"postal_code\\\": \\\"10115\\\", \\\"country_code\\\": \\\"DE\\\", \\\"address_line1\\\": \\\"Invalidenstrasse 10\\\", \\\"address_line2\\\": null}\",\n        \"shipped_at\": \"2026-07-06T09:00:00\",\n        \"estimated_delivery_at\": \"2026-07-08T18:00:00\",\n        \"delivered_at\": \"2026-07-08T13:25:00\"\n      }\n    ]\n  }\n}"
+          }
+        },
+        {
+          "tool": "get_warranty_details",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"WARRANTY_FOUND\",\n  \"data\": {\n    \"order_number\": \"ORD-2026-000001\",\n    \"order_item_id\": 1,\n    \"product_id\": 2,\n    \"sku\": \"LAP-LEN-X1C\",\n    \"product_name\": \"Lenovo ThinkPad X1 Carbon\",\n    \"warranty_plan_id\": 2,\n    \"warranty_plan_name\": \"Extended Warranty - 2 Years\",\n    \"duration_months\": 24,\n    \"purchase_price\": \"169.00\",\n    \"valid_from\": \"2026-07-05\",\n    \"valid_until\": \"2028-07-04\",\n    \"status\": \"ACTIVE\",\n    \"has_extended_warranty\": true\n  }\n}"
+          }
+        },
+        {
+          "tool": "search_policy",
+          "result": {
+            "type": "text",
+            "text": "{\n  \"success\": true,\n  \"code\": \"POLICY_EVIDENCE_FOUND\",\n  \"strategy\": \"simple\",\n  \"count\": 3,\n  \"results\": [\n    {\n      \"chunk_id\": \"return_policy_de_2026-0002\",\n      \"score\": 0.682152,\n      \"text\": \"necessary to inspect the product. Returned items may be inspected before a refund is approved.\\n3. Damaged or Defective Products\\nIf a product arrives damaged, is defective on arrival, or becomes unusable due to a manufacturing defect, the\\ncustomer should contact support as soon as reasonably possible. Reports made within 14 calendar days of\\ndelivery will be handled under the expedited damaged-item process.\\nFor damage reported after 14 days, the applicable remedy depends on the standard return window, statutory\\nconsumer rights, and any active extended warranty or protection plan purchased for the item. Support may request\\nphotos, diagnostic information, or other evidence before approving a replacement, repair, or refund.\\n4. Electronics and Opened Products\\nOpened electronics can still be eligible for return within the standard return period if the product has only been\\ninspected or tested in a reasonable manner. Products showing accidental damage, misuse, unauthorized\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    },\n    {\n      \"chunk_id\": \"return_policy_de_2026-0004\",\n      \"score\": 0.673918,\n      \"text\": \"terms. The exact coverage rules must be read together with the customer's purchased plan.\\nExample: a damaged laptop reported 45 days after delivery is outside the standard 30-day return window. If the\\ncustomer has an active extended warranty, the item may still qualify for a repair, replacement, or another remedy\\nunder the warranty terms, but a standard return is not automatically guaranteed.\\n6. Non-Returnable or Restricted Items\\nCertain goods may be restricted from change-of-mind returns for hygiene, licensing, personalization, or regulatory\\nreasons. Examples can include personalized products, activated digital licenses, and certain sealed\\nhygiene-sensitive goods once opened. This restriction does not remove statutory rights relating to defective\\nproducts.\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    },\n    {\n      \"chunk_id\": \"return_policy_de_2026-0003\",\n      \"score\": 0.621861398,\n      \"text\": \"inspected or tested in a reasonable manner. Products showing accidental damage, misuse, unauthorized\\nmodification, or missing critical components may be excluded from the standard change-of-mind return process.\\nWhere an electronics product is defective rather than merely unwanted, warranty and statutory remedies may\\napply even when the standard change-of-mind return window has expired.\\n5. Extended Warranty and Protection Plans\\nAn extended warranty or protection plan does not automatically extend the standard 30-day change-of-mind return\\nperiod. Instead, it provides additional remedies for covered faults or damage after the standard return period has\\nended.\\nIf a customer has an active extended warranty, support must first confirm the specific plan purchased and its\\nvalidity period. Coverage may include repair, replacement, or other remedies depending on the applicable warranty\\nterms. The exact coverage rules must be read together with the customer's purchased plan.\",\n      \"country\": \"DE\",\n      \"policy_version\": \"2026.1\",\n      \"source_document\": \"return_policy_de_2026.pdf\"\n    }\n  ]\n}"
+          }
+        }
       ],
       "tool_selection_pass": true,
       "missing_tools": [],
       "forbidden_tools_used": [],
       "extra_tools": [
-        "list_customer_addresses"
+        "get_order_details"
       ],
-      "final_output": "The Sony WH-1000XM5 is available for **\u20ac349.00**.\n\nWhich saved shipping address should I use?\n\n1. Invalidenstrasse 10, 10115 Berlin  \n2. Potsdamer Platz 5, Floor 7, 10785 Berlin  \n\nPlease also confirm the quantity.",
-      "latency_seconds": 6.781005700002424,
+      "final_output": "Your **Lenovo ThinkPad X1 Carbon** from order **ORD-2026-000001** was delivered on **July 8, 2026**. It has an active **2-year extended warranty through July 4, 2028**.\n\n- If you report the damage within **14 calendar days of delivery**, it may qualify for the expedited damaged-item process.\n- The standard return window is **30 days**, but the extended warranty does **not automatically extend** that period.\n- After 30 days, repair, replacement, or another remedy may be available under the warranty, depending on the damage and plan terms. Accidental damage or misuse may be excluded.\n\nPlease contact support as soon as possible with photos and a description of the damage; an inspection or additional evidence may be required.",
+      "latency_seconds": 5.452418500000022,
       "error": null
     }
   ]

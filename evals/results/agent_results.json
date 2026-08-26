@@ -1,0 +1,106 @@
+{
+  "summary": {
+    "case_count": 6,
+    "tool_selection_pass_rate": 1.0,
+    "error_count": 0,
+    "average_latency_seconds": 9.646423166675959,
+    "total_extra_tools": 1
+  },
+  "cases": [
+    {
+      "case_id": "order_status_001",
+      "customer_id": 1,
+      "query": "I am customer 1. Where is order ORD-2026-000001?",
+      "tools_called": [
+        "check_order_status"
+      ],
+      "tool_selection_pass": true,
+      "missing_tools": [],
+      "forbidden_tools_used": [],
+      "extra_tools": [],
+      "final_output": "Order **ORD-2026-000001** was delivered by **DHL** on **July 8, 2026 at 13:25**.\n\nTracking number: **DHL-DE-100001**",
+      "latency_seconds": 13.131384699954651,
+      "error": null
+    },
+    {
+      "case_id": "order_details_001",
+      "customer_id": 1,
+      "query": "I am customer 1. What is included in order ORD-2026-000001?",
+      "tools_called": [
+        "get_order_details"
+      ],
+      "tool_selection_pass": true,
+      "missing_tools": [],
+      "forbidden_tools_used": [],
+      "extra_tools": [],
+      "final_output": "Order **ORD-2026-000001** includes:\n\n- **1 \u00d7 Lenovo ThinkPad X1 Carbon**\n- Unit price: **\u20ac1,499.00**\n- Total: **\u20ac1,499.00**",
+      "latency_seconds": 4.307575799990445,
+      "error": null
+    },
+    {
+      "case_id": "warranty_001",
+      "customer_id": 1,
+      "query": "I am customer 1. What warranty do I have for order ORD-2026-000001?",
+      "tools_called": [
+        "get_warranty_details"
+      ],
+      "tool_selection_pass": true,
+      "missing_tools": [],
+      "forbidden_tools_used": [],
+      "extra_tools": [],
+      "final_output": "For order **ORD-2026-000001**, you have an **active Extended Warranty \u2013 2 Years** for the **Lenovo ThinkPad X1 Carbon**.\n\n- Valid: **July 5, 2026 \u2013 July 4, 2028**\n- Warranty status: **Active**",
+      "latency_seconds": 4.191451900056563,
+      "error": null
+    },
+    {
+      "case_id": "damaged_return_001",
+      "customer_id": 1,
+      "query": "I am customer 1. My laptop from order ORD-2026-000001 is damaged. Can I return it?",
+      "tools_called": [
+        "check_order_status",
+        "get_warranty_details",
+        "search_policy"
+      ],
+      "tool_selection_pass": true,
+      "missing_tools": [],
+      "forbidden_tools_used": [],
+      "extra_tools": [],
+      "final_output": "Your Lenovo ThinkPad X1 Carbon was delivered on **July 8, 2026**, and your **2-year extended warranty is active through July 4, 2028**.\n\nYou may be eligible for a return if it is within the standard **30-day return period**. If reported after that, accidental damage may be excluded from a standard return, but covered defects or damage may qualify for **repair, replacement, or another warranty remedy**. Support may request photos or diagnostic information.\n\nPlease provide when the damage occurred and whether it was accidental or due to a product defect.",
+      "latency_seconds": 16.292486699996516,
+      "error": null
+    },
+    {
+      "case_id": "policy_only_001",
+      "customer_id": 1,
+      "query": "What is the standard return period in Germany?",
+      "tools_called": [
+        "search_policy"
+      ],
+      "tool_selection_pass": true,
+      "missing_tools": [],
+      "forbidden_tools_used": [],
+      "extra_tools": [],
+      "final_output": "In Germany, most unused products can be returned within **30 calendar days of delivery**, subject to the return conditions.",
+      "latency_seconds": 13.174634200055152,
+      "error": null
+    },
+    {
+      "case_id": "purchase_confirmation_001",
+      "customer_id": 1,
+      "query": "I want to buy the Sony WH-1000XM5.",
+      "tools_called": [
+        "search_products",
+        "list_customer_addresses"
+      ],
+      "tool_selection_pass": true,
+      "missing_tools": [],
+      "forbidden_tools_used": [],
+      "extra_tools": [
+        "list_customer_addresses"
+      ],
+      "final_output": "The Sony WH-1000XM5 is available for **\u20ac349.00**.\n\nWhich saved shipping address should I use?\n\n1. Invalidenstrasse 10, 10115 Berlin  \n2. Potsdamer Platz 5, Floor 7, 10785 Berlin  \n\nPlease also confirm the quantity.",
+      "latency_seconds": 6.781005700002424,
+      "error": null
+    }
+  ]
+}

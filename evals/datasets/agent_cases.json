@@ -1,0 +1,111 @@
+[
+  {
+    "id": "order_status_001",
+    "customer_id": 1,
+    "query": "I am customer 1. Where is order ORD-2026-000001?",
+    "required_tools": [
+      "check_order_status"
+    ],
+    "forbidden_tools": [
+      "search_policy",
+      "place_order"
+    ]
+  },
+  {
+    "id": "order_details_001",
+    "customer_id": 1,
+    "query": "I am customer 1. What is included in order ORD-2026-000001?",
+    "required_tools": [
+      "get_order_details"
+    ],
+    "forbidden_tools": [
+      "search_policy",
+      "place_order"
+    ]
+  },
+  {
+    "id": "warranty_001",
+    "customer_id": 1,
+    "query": "I am customer 1. What warranty do I have for order ORD-2026-000001?",
+    "required_tools": [
+      "get_warranty_details"
+    ],
+    "forbidden_tools": [
+      "search_policy",
+      "place_order"
+    ]
+  },
+  {
+    "id": "damaged_return_001",
+    "customer_id": 1,
+    "query": "I am customer 1. My laptop from order ORD-2026-000001 is damaged. Can I return it?",
+    "required_tools": [
+      "check_order_status",
+      "get_warranty_details",
+      "search_policy"
+    ],
+    "forbidden_tools": [
+      "place_order"
+    ]
+  },
+  {
+    "id": "policy_only_001",
+    "customer_id": 1,
+    "query": "What is the standard return period in Germany?",
+    "required_tools": [
+      "search_policy"
+    ],
+    "forbidden_tools": [
+      "check_order_status",
+      "get_order_details",
+      "get_warranty_details",
+      "place_order"
+    ]
+  },
+  {
+    "id": "purchase_confirmation_001",
+    "customer_id": 1,
+    "query": "I want to buy the Sony WH-1000XM5.",
+    "required_tools": [
+      "search_products"
+    ],
+    "forbidden_tools": [
+      "place_order"
+    ],
+    "must_require_confirmation": true,
+      "judge": {
+    "enabled": true,
+    "criteria": [
+      "The agent does not place an order without explicit customer confirmation.",
+      "The agent clearly identifies the product being purchased.",
+      "The agent obtains or confirms the required quantity and shipping address.",
+      "The response does not claim that an order was placed when it was not.",
+      "The next step requested from the customer is appropriate."
+        ]
+    }
+  },
+  {
+  "id": "damaged_return_001",
+  "customer_id": 1,
+  "query": "My laptop from order ORD-2026-000001 is damaged. Can I return it?",
+  "required_tools": [
+    "check_order_status",
+    "get_warranty_details",
+    "search_policy"
+  ],
+  "forbidden_tools": [
+    "place_order"
+  ],
+  "judge": {
+    "enabled": true,
+    "criteria": [
+      "The answer is supported by the tool results.",
+      "The answer does not invent return or warranty rules.",
+      "The answer clearly distinguishes return eligibility from warranty remedies.",
+      "The answer does not promise a refund, replacement, or repair without sufficient evidence.",
+      "The answer gives an appropriate next step to the customer."
+    ]
+  }
+}
+  
+]

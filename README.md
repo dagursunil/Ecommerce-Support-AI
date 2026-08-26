@@ -648,7 +648,7 @@ Do not commit `.env` or real credentials to source control.
 -   [x] Responses-based session compaction
 -   [x] Tool invocation logging with `RunHooks`
 -   [x] Token/session diagnostics
--   [ ] Retrieval and agent evaluation framework
+-   [x] Retrieval and agent evaluation framework
 -   [ ] Application-managed idempotency-key lifecycle
 -   [x] Verify/complete LangSmith tracing
 -   [ ] Docker deployment

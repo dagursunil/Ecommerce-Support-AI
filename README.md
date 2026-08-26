@@ -650,7 +650,7 @@ Do not commit `.env` or real credentials to source control.
 -   [x] Token/session diagnostics
 -   [ ] Retrieval and agent evaluation framework
 -   [ ] Application-managed idempotency-key lifecycle
--   [ ] Verify/complete LangSmith tracing
+-   [x] Verify/complete LangSmith tracing
 -   [ ] Docker deployment
 
 ## Next Phase: Evaluations

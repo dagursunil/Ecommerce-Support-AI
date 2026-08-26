@@ -121,6 +121,22 @@ def place_order(
         idempotency_key=idempotency_key,
     )
 
+@mcp.tool()
+def get_order_details(
+    customer_id: int,
+    order_number: str,
+) -> dict:
+    """
+    Get the details and itemized contents of a customer's order.
+
+    Use this when the customer asks what products or items
+    are included in a specific order.
+    """
+
+    return order_service.get_order_details(
+        customer_id=customer_id,
+        order_number=order_number,
+    )
 
 if __name__ == "__main__":
     mcp.run(

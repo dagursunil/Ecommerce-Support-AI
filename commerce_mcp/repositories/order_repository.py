@@ -332,8 +332,73 @@ class OrderRepository:
                 "total_amount": total_amount,
                 "currency": product["currency"],
             }
+    def get_order_details(
+        self,
+        customer_id: int,
+        order_number: str,
+    ) -> dict | None:
+
+        order_sql = text("""
+            SELECT
+                o.order_id,
+                o.order_number,
+                o.order_status,
+                o.total_amount,
+                o.currency,
+                o.order_date
+            FROM orders o
+            WHERE o.customer_id = :customer_id
+            AND o.order_number = :order_number
+        """)
+
+        items_sql = text("""
+            SELECT
+                oi.order_item_id,
+                p.product_id,
+                p.sku,
+                p.name AS product_name,
+                oi.quantity,
+                oi.unit_price,
+                oi.line_total
+            FROM order_items oi
+            JOIN products p
+                ON p.product_id = oi.product_id
+            WHERE oi.order_id = :order_id
+            ORDER BY oi.order_item_id
+        """)
+
+        with engine.connect() as connection:
+            order_row = connection.execute(
+                order_sql,
+                {
+                    "customer_id": customer_id,
+                    "order_number": order_number,
+                },
+            ).mappings().first()
+
+            if order_row is None:
+                return None
+
+            item_rows = connection.execute(
+                items_sql,
+                {
+                    "order_id": order_row["order_id"],
+                },
+            ).mappings().all()
+
+            return {
+                "order": dict(order_row),
+                "items": [
+                    dict(row)
+                    for row in item_rows
+                ],
+            }
+
+
 def generate_order_number() -> str:
     return f"ORD-{secrets.token_hex(8).upper()}"
+
+
 
 if __name__ == "__main__":
     repo = OrderRepository()

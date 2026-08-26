@@ -110,3 +110,27 @@ class OrderService:
             "success": False,
             "code": status,
         }
+
+    def get_order_details(
+        self,
+        customer_id: int,
+        order_number: str,
+    ) -> dict:
+
+        result = self.repository.get_order_details(
+            customer_id=customer_id,
+            order_number=order_number,
+        )
+
+        if result is None:
+            return {
+                "success": False,
+                "code": "ORDER_NOT_FOUND_OR_NOT_ACCESSIBLE",
+                "message": "Order was not found or is not accessible.",
+            }
+
+        return {
+            "success": True,
+            "code": "ORDER_DETAILS_FOUND",
+            "data": result,
+        }

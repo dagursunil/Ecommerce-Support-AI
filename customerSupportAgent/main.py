@@ -2,15 +2,53 @@ import asyncio
 import os
 
 from dotenv import load_dotenv
-from agents import Agent, Runner
 from agents.mcp import MCPServerStreamableHttp
+from agents import (
+    Agent,
+    Runner,
+    RunHooks,
+    SQLiteSession,
+    set_trace_processors,
+)
+from agents.memory import OpenAIResponsesCompactionSession
 
 from customerSupportAgent.prompt import (
     SUPPORT_AGENT_INSTRUCTIONS,
 )
 
+from langsmith.integrations.openai_agents_sdk import (
+    OpenAIAgentsTracingProcessor,
+)
 
 load_dotenv()
+
+
+set_trace_processors([
+    OpenAIAgentsTracingProcessor()
+])
+
+
+
+
+class LoggingHooks(RunHooks):
+
+    async def on_tool_start(
+        self,
+        context,
+        agent,
+        tool,
+    ):
+        print(f"\n[TOOL START] {tool.name}")
+
+    async def on_tool_end(
+        self,
+        context,
+        agent,
+        tool,
+        result,
+    ):
+        print(f"[TOOL END] {tool.name}")
+        print(f"[TOOL RESULT] {result}")
 
 
 COMMERCE_MCP_URL = os.getenv(
@@ -47,21 +85,65 @@ async def main():
         agent = Agent(
             name="eCommerce Customer Support Agent",
             instructions=SUPPORT_AGENT_INSTRUCTIONS,
+            model="gpt-5.6-luna",
             mcp_servers=[
                 commerce_mcp,
                 policy_mcp,
             ],
         )
 
-        user_query = input("\nCustomer: ")
-
-        result = await Runner.run(
-            agent,
-            user_query,
+        underlying_session = SQLiteSession(
+            "customer-support-session"
         )
 
-        print("\nSupport Agent:")
-        print(result.final_output)
+        session = OpenAIResponsesCompactionSession(
+            session_id="customer-support-session",
+            underlying_session=underlying_session,
+        )
+
+
+        print("\nCustomer Support Agent is ready.")
+        print("Type 'exit' or 'quit' to end the session.\n")
+
+        while True:
+
+            user_query = input("Customer: ").strip()
+
+            if user_query.lower() in {"exit", "quit"}:
+                print("Session ended.")
+                break
+
+            if not user_query:
+                continue
+
+            result = await Runner.run(
+                agent,
+                user_query,
+                session=session,
+                hooks=LoggingHooks(),
+            )
+
+            usage = result.context_wrapper.usage
+
+            print(
+                f"[USAGE] input={usage.input_tokens} "
+                f"output={usage.output_tokens} "
+                f"total={usage.total_tokens}"
+            )
+
+        # Inspect underlying session
+            items = await underlying_session.get_items()
+
+            print(f"[SESSION] stored_items={len(items)}")
+            print(
+                "[SESSION TYPES]",
+                [item.get("type") for item in items]
+            )
+            
+
+            print("\nSupport Agent:")
+            print(result.final_output)
+            print()
 
 
 if __name__ == "__main__":

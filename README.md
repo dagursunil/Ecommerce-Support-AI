@@ -854,97 +854,97 @@ Do not commit \`.env\` or real credentials to source control.
 
 **### Commerce MCP**
 
-\- [x] MySQL schema
+- [x] MySQL schema
 
-\- [x] SQLAlchemy connection pooling
+- [x] SQLAlchemy connection pooling
 
-\- [x] Product repository/service
+- [x] Product repository/service
 
-\- [x] Order repository/service
+- [x] Order repository/service
 
-\- [x] Warranty repository/service
+- [x] Warranty repository/service
 
-\- [x] MCP Streamable HTTP server
+- [x] MCP Streamable HTTP server
 
-\- [x] Product search
+- [x] Product search
 
-\- [x] Product details
+- [x] Product details
 
-\- [x] Customer order listing
+- [x] Customer order listing
 
-\- [x] Order/shipment status
+- [x] Order/shipment status
 
 - [x] Itemized order details (`get_order_details`)
 
-\- [x] Warranty details
+- [x] Warranty details
 
-\- [x] Transactional order placement
+- [x] Transactional order placement
 
-\- [x] Idempotency protection
+- [x] Idempotency protection
 
-\- [x] Unit and integration testing
+- [x] Unit and integration testing
 
 **### Policy MCP**
 
-\- [x] Policy PDF
+- [x] Policy PDF
 
-\- [x] PDF text extraction
+- [x] PDF text extraction
 
-\- [x] Policy chunking
+- [x] Policy chunking
 
-\- [x] Embeddings
+- [x] Embeddings
 
-\- [x] Pinecone integration
+- [x] Pinecone integration
 
-\- [x] Simple semantic retrieval
+- [x] Simple semantic retrieval
 
-\- [x] HyDE retrieval
+- [x] HyDE retrieval
 
-\- [x] Multi-Query retrieval
+- [x] Multi-Query retrieval
 
-\- [x] Adaptive retrieval
+- [x] Adaptive retrieval
 
-\- [x] Policy evidence service
+- [x] Policy evidence service
 
-\- [x] MCP Streamable HTTP server
+- [x] MCP Streamable HTTP server
 
-\- [x] Policy search tool
+- [x] Policy search tool
 
-\- [x] Integration testing
+- [x] Integration testing
 
-\- [x] Deterministic adaptive-routing tests
+- [x] Deterministic adaptive-routing tests
 
 **### Customer Support Agent**
 
-\- [x] OpenAI Agents SDK integration
+- [x] OpenAI Agents SDK integration
 
-\- [x] Native MCP integration
+- [x] Native MCP integration
 
-\- [x] Commerce MCP integration
+- [x] Commerce MCP integration
 
-\- [x] Policy MCP integration
+- [x] Policy MCP integration
 
-\- [x] Autonomous tool selection
+- [x] Autonomous tool selection
 
-\- [x] Commerce-only query handling
+- [x] Commerce-only query handling
 
-\- [x] Policy-only query handling
+- [x] Policy-only query handling
 
-\- [x] Multi-tool query handling
+- [x] Multi-tool query handling
 
-\- [x] Order-based warranty lookup
+- [x] Order-based warranty lookup
 
-\- [x] Warranty verification from customer ID + order number
+- [x] Warranty verification from customer ID + order number
 
-\- [ ] Detailed warranty-policy document ingestion
+- [ ] Detailed warranty-policy document ingestion
 
-\- [ ] Retrieval evaluation framework
+- [ ] Retrieval evaluation framework
 
-\- [ ] Customer confirmation flow for order placement
+- [x] Customer confirmation flow for order placement
 
-\- [ ] Idempotency-key generation
+- [ ] Idempotency-key generation
 
-\- [x] Multi-turn conversation/session handling
+- [x] Multi-turn conversation/session handling
 
 - [x] SQLite-backed session history
 
@@ -954,7 +954,7 @@ Do not commit \`.env\` or real credentials to source control.
 
 - [x] Token/session diagnostics
 
-\- [ ] Docker deployment
+- [ ] Docker deployment
 
 **## Known Issues / Next Steps**
 

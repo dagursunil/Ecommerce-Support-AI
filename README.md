@@ -649,7 +649,7 @@ Do not commit `.env` or real credentials to source control.
 -   [x] Tool invocation logging with `RunHooks`
 -   [x] Token/session diagnostics
 -   [x] Retrieval and agent evaluation framework
--   [ ] Application-managed idempotency-key lifecycle
+-   [X] Application-managed idempotency-key lifecycle
 -   [x] Verify/complete LangSmith tracing
 -   [ ] Docker deployment
 

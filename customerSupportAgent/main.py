@@ -1,32 +1,26 @@
 import asyncio
-import os
+import json
 
 from dotenv import load_dotenv
-from agents.mcp import MCPServerStreamableHttp, MCPToolMetaContext
+
 from agents import (
-    Agent,
-    Runner,
     RunHooks,
     SQLiteSession,
     set_trace_processors,
 )
 from agents.memory import OpenAIResponsesCompactionSession
 
-from customerSupportAgent.prompt import (
-    SUPPORT_AGENT_INSTRUCTIONS,
-)
-
 from langsmith.integrations.openai_agents_sdk import (
     OpenAIAgentsTracingProcessor,
 )
 
 from customerSupportAgent.context import (
-    PendingCheckout,
     SupportContext,
 )
+from customerSupportAgent.service import (
+    CustomerSupportAgentService,
+)
 
-
-import json
 
 load_dotenv()
 
@@ -62,13 +56,6 @@ class LoggingHooks(RunHooks):
         app_context: SupportContext = context.context
 
         try:
-            # MCP result has been coming back in this shape:
-            #
-            # {
-            #     "type": "text",
-            #     "text": "{ ... JSON ... }"
-            # }
-
             if isinstance(result, dict):
                 text = result.get("text")
 
@@ -90,113 +77,61 @@ class LoggingHooks(RunHooks):
                     "Pending checkout cleared."
                 )
 
-        except (json.JSONDecodeError, TypeError):
-            # We don't clear anything if we cannot confidently
-            # determine that order placement succeeded.
+        except (
+            json.JSONDecodeError,
+            TypeError,
+        ):
+            # Do not clear the checkout if we cannot
+            # confidently determine that the order succeeded.
             pass
-
-COMMERCE_MCP_URL = os.getenv(
-    "COMMERCE_MCP_URL",
-    "http://localhost:8001/mcp",
-)
-
-POLICY_MCP_URL = os.getenv(
-    "POLICY_MCP_URL",
-    "http://localhost:8002/mcp",
-)
 
 
 async def main():
 
-    def resolve_commerce_meta(
-        meta_context: MCPToolMetaContext,
-    ) -> dict | None:
+    customer_id = int(
+        input("Customer ID: ")
+    )
 
-        # We only need special metadata for order placement.
-        if meta_context.tool_name != "place_order":
-            return None
+    app_context = SupportContext(
+        customer_id=customer_id,
+    )
 
-        app_context: SupportContext = (
-            meta_context.run_context.context
+    # Keep existing persistent session behaviour.
+    underlying_session = SQLiteSession(
+        "customer-support-session"
+    )
+
+    # Keep existing session compaction behaviour.
+    session = OpenAIResponsesCompactionSession(
+        session_id="customer-support-session",
+        underlying_session=underlying_session,
+    )
+
+    service = CustomerSupportAgentService()
+
+    await service.start()
+
+    try:
+
+        print(
+            "\nCustomer Support Agent is ready."
         )
 
-        args = meta_context.arguments or {}
-
-        product_id = args["product_id"]
-        quantity = args["quantity"]
-        address_id = args["address_id"]
-
-        pending = app_context.pending_checkout
-
-        # No checkout exists yet -> this is a new checkout operation.
-        if pending is None:
-            pending = PendingCheckout(
-                product_id=product_id,
-                quantity=quantity,
-                address_id=address_id,
-            )
-
-            app_context.pending_checkout = pending
-            print(
-                "[IDEMPOTENCY]",
-                pending.idempotency_key,
-            )
-
-        return {
-            "idempotency_key": pending.idempotency_key,
-        }
-
-    async with MCPServerStreamableHttp(
-        name="commerce-mcp",
-        params={
-            "url": COMMERCE_MCP_URL,
-            "timeout": 10,
-        },
-        cache_tools_list=True,
-        max_retry_attempts=3,
-        tool_meta_resolver=resolve_commerce_meta,
-    ) as commerce_mcp, MCPServerStreamableHttp(
-        name="policy-mcp",
-        params={
-            "url": POLICY_MCP_URL,
-            "timeout": 10,
-        },
-        cache_tools_list=True,
-        max_retry_attempts=3,
-    ) as policy_mcp:
-
-        agent = Agent(
-            name="eCommerce Customer Support Agent",
-            instructions=SUPPORT_AGENT_INSTRUCTIONS,
-            model="gpt-5.6-luna",
-            mcp_servers=[
-                commerce_mcp,
-                policy_mcp,
-            ],
+        print(
+            "Type 'exit' or 'quit' "
+            "to end the session.\n"
         )
-
-        underlying_session = SQLiteSession(
-            "customer-support-session"
-        )
-
-        session = OpenAIResponsesCompactionSession(
-            session_id="customer-support-session",
-            underlying_session=underlying_session,
-        )
-
-        customer_id = int(input("Customer ID: "))
-
-        app_context = SupportContext(
-            customer_id=customer_id,
-        )        
-        print("\nCustomer Support Agent is ready.")
-        print("Type 'exit' or 'quit' to end the session.\n")
 
         while True:
 
-            user_query = input("Customer: ").strip()
+            user_query = input(
+                "Customer: "
+            ).strip()
 
-            if user_query.lower() in {"exit", "quit"}:
+            if user_query.lower() in {
+                "exit",
+                "quit",
+            }:
                 print("Session ended.")
                 break
 
@@ -204,42 +139,50 @@ async def main():
                 continue
 
             agent_input = f"""
-            Authenticated customer context:
-            customer_id={app_context.customer_id}
+Authenticated customer context:
+customer_id={app_context.customer_id}
 
-            Customer message:
-            {user_query}
-            """.strip()                
-            
-            result = await Runner.run(
-                agent,
-                agent_input,
+Customer message:
+{user_query}
+""".strip()
+
+            result = await service.run(
+                message=agent_input,
+                app_context=app_context,
                 session=session,
                 hooks=LoggingHooks(),
-                context=app_context,
             )
 
             usage = result.context_wrapper.usage
 
             print(
-                f"[USAGE] input={usage.input_tokens} "
+                f"[USAGE] "
+                f"input={usage.input_tokens} "
                 f"output={usage.output_tokens} "
                 f"total={usage.total_tokens}"
             )
 
-        # Inspect underlying session
+            # Inspect underlying session.
             items = await underlying_session.get_items()
 
-            print(f"[SESSION] stored_items={len(items)}")
+            print(
+                f"[SESSION] stored_items={len(items)}"
+            )
+
             print(
                 "[SESSION TYPES]",
-                [item.get("type") for item in items]
+                [
+                    item.get("type")
+                    for item in items
+                ],
             )
-            
 
             print("\nSupport Agent:")
             print(result.final_output)
             print()
+
+    finally:
+        await service.stop()
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@ import asyncio
 import os
 
 from dotenv import load_dotenv
-from agents.mcp import MCPServerStreamableHttp
+from agents.mcp import MCPServerStreamableHttp, MCPToolMetaContext
 from agents import (
     Agent,
     Runner,
@@ -20,14 +20,20 @@ from langsmith.integrations.openai_agents_sdk import (
     OpenAIAgentsTracingProcessor,
 )
 
+from customerSupportAgent.context import (
+    PendingCheckout,
+    SupportContext,
+)
+
+
+import json
+
 load_dotenv()
 
 
 set_trace_processors([
     OpenAIAgentsTracingProcessor()
 ])
-
-
 
 
 class LoggingHooks(RunHooks):
@@ -50,6 +56,44 @@ class LoggingHooks(RunHooks):
         print(f"[TOOL END] {tool.name}")
         print(f"[TOOL RESULT] {result}")
 
+        if tool.name != "place_order":
+            return
+
+        app_context: SupportContext = context.context
+
+        try:
+            # MCP result has been coming back in this shape:
+            #
+            # {
+            #     "type": "text",
+            #     "text": "{ ... JSON ... }"
+            # }
+
+            if isinstance(result, dict):
+                text = result.get("text")
+
+                if text:
+                    order_result = json.loads(text)
+                else:
+                    return
+            else:
+                return
+
+            if (
+                order_result.get("success") is True
+                and order_result.get("code") == "ORDER_PLACED"
+            ):
+                app_context.pending_checkout = None
+
+                print(
+                    "[CHECKOUT] Order completed. "
+                    "Pending checkout cleared."
+                )
+
+        except (json.JSONDecodeError, TypeError):
+            # We don't clear anything if we cannot confidently
+            # determine that order placement succeeded.
+            pass
 
 COMMERCE_MCP_URL = os.getenv(
     "COMMERCE_MCP_URL",
@@ -64,6 +108,44 @@ POLICY_MCP_URL = os.getenv(
 
 async def main():
 
+    def resolve_commerce_meta(
+        meta_context: MCPToolMetaContext,
+    ) -> dict | None:
+
+        # We only need special metadata for order placement.
+        if meta_context.tool_name != "place_order":
+            return None
+
+        app_context: SupportContext = (
+            meta_context.run_context.context
+        )
+
+        args = meta_context.arguments or {}
+
+        product_id = args["product_id"]
+        quantity = args["quantity"]
+        address_id = args["address_id"]
+
+        pending = app_context.pending_checkout
+
+        # No checkout exists yet -> this is a new checkout operation.
+        if pending is None:
+            pending = PendingCheckout(
+                product_id=product_id,
+                quantity=quantity,
+                address_id=address_id,
+            )
+
+            app_context.pending_checkout = pending
+            print(
+                "[IDEMPOTENCY]",
+                pending.idempotency_key,
+            )
+
+        return {
+            "idempotency_key": pending.idempotency_key,
+        }
+
     async with MCPServerStreamableHttp(
         name="commerce-mcp",
         params={
@@ -72,6 +154,7 @@ async def main():
         },
         cache_tools_list=True,
         max_retry_attempts=3,
+        tool_meta_resolver=resolve_commerce_meta,
     ) as commerce_mcp, MCPServerStreamableHttp(
         name="policy-mcp",
         params={
@@ -102,9 +185,10 @@ async def main():
         )
 
         customer_id = int(input("Customer ID: "))
-        session_context = {
-            "customer_id": customer_id
-        }        
+
+        app_context = SupportContext(
+            customer_id=customer_id,
+        )        
         print("\nCustomer Support Agent is ready.")
         print("Type 'exit' or 'quit' to end the session.\n")
 
@@ -121,7 +205,7 @@ async def main():
 
             agent_input = f"""
             Authenticated customer context:
-            customer_id={session_context["customer_id"]}
+            customer_id={app_context.customer_id}
 
             Customer message:
             {user_query}
@@ -132,6 +216,7 @@ async def main():
                 agent_input,
                 session=session,
                 hooks=LoggingHooks(),
+                context=app_context,
             )
 
             usage = result.context_wrapper.usage

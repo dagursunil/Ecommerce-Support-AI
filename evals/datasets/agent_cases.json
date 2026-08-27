@@ -36,19 +36,6 @@
     ]
   },
   {
-    "id": "damaged_return_001",
-    "customer_id": 1,
-    "query": "I am customer 1. My laptop from order ORD-2026-000001 is damaged. Can I return it?",
-    "required_tools": [
-      "check_order_status",
-      "get_warranty_details",
-      "search_policy"
-    ],
-    "forbidden_tools": [
-      "place_order"
-    ]
-  },
-  {
     "id": "policy_only_001",
     "customer_id": 1,
     "query": "What is the standard return period in Germany?",

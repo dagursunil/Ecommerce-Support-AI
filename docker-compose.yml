@@ -23,5 +23,84 @@ services:
 
     restart: unless-stopped
 
+
+  commerce-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: ecomm-support-commerce-mcp
+
+    command:
+      python -m commerce_mcp.server
+
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ecomm_support
+      DB_USER: ecomm_user
+      DB_PASSWORD: ecomm_pass
+
+    ports:
+      - "8001:8001"
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    restart: unless-stopped
+
+
+  policy-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: ecomm-support-policy-mcp
+
+    command:
+      python -m policy_mcp.server
+
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      PINECONE_API_KEY: ${PINECONE_API_KEY}
+      PINECONE_INDEX_NAME: ${PINECONE_INDEX_NAME}
+
+    ports:
+      - "8002:8002"
+
+    restart: unless-stopped
+
+
+  agent-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: ecomm-support-agent-api
+
+    command:
+      uvicorn customerSupportAgent.api:app --host 0.0.0.0 --port 8080
+
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+
+      COMMERCE_MCP_URL: http://commerce-mcp:8001/mcp
+      POLICY_MCP_URL: http://policy-mcp:8002/mcp
+
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      - commerce-mcp
+      - policy-mcp
+
+    restart: unless-stopped
+
+
 volumes:
   mysql_data:
